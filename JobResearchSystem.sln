@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobResearchSystem", "JobResearchSystem\JobResearchSystem.csproj", "{6CE86B29-08C2-45F7-B7D0-DF38F4AD56BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobResearchSystem.API", "JobResearchSystem\JobResearchSystem.API.csproj", "{6CE86B29-08C2-45F7-B7D0-DF38F4AD56BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobResearchSystem.Infrastructure", "JobResearchSystem.Infrastructure\JobResearchSystem.Infrastructure.csproj", "{09816627-F03E-4BB8-9E21-479112A43A41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobResearchSystem.Application", "JobResearchSystem.Application\JobResearchSystem.Application.csproj", "{33C825DC-D217-4159-8EE4-81700C9EE405}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobResearchSystem.Domain", "JobResearchSystem.Domain\JobResearchSystem.Domain.csproj", "{8D069FE0-B791-42B0-88BB-27065A408767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{6CE86B29-08C2-45F7-B7D0-DF38F4AD56BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CE86B29-08C2-45F7-B7D0-DF38F4AD56BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CE86B29-08C2-45F7-B7D0-DF38F4AD56BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09816627-F03E-4BB8-9E21-479112A43A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09816627-F03E-4BB8-9E21-479112A43A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09816627-F03E-4BB8-9E21-479112A43A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09816627-F03E-4BB8-9E21-479112A43A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C825DC-D217-4159-8EE4-81700C9EE405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C825DC-D217-4159-8EE4-81700C9EE405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C825DC-D217-4159-8EE4-81700C9EE405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C825DC-D217-4159-8EE4-81700C9EE405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D069FE0-B791-42B0-88BB-27065A408767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D069FE0-B791-42B0-88BB-27065A408767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D069FE0-B791-42B0-88BB-27065A408767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D069FE0-B791-42B0-88BB-27065A408767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
