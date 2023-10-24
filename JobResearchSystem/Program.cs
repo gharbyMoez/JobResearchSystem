@@ -1,3 +1,8 @@
+using JobResearchSystem.Application;
+using JobResearchSystem.Infrastructure;
+using JobResearchSystem.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,13 +12,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region Connection String Configuration
+builder.Services.AddDbContext<ApplicationContext>(opt =>
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+#endregion
+
+
+builder.Services
+    .AddInfrastructureDependencies()
+    .AddApplicationDependeicies();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
