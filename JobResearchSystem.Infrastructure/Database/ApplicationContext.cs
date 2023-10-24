@@ -16,7 +16,7 @@ namespace JobResearchSystem.Infrastructure.Database
         public DbSet<ApplicantStatus> ApplicantStatuses { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Company> Companies { get; set; } = null!;
-        public DbSet<Experiance> Experiances { get; set; } = null!;
+        public DbSet<Experience> Experiences { get; set; } = null!;
         public DbSet<Job> Jobs { get; set; } = null!;
         public DbSet<JobSeeker> JobSeekers { get; set; } = null!;
         public DbSet<JobStatus> JobStatuses { get; set; } = null!;
@@ -33,6 +33,7 @@ namespace JobResearchSystem.Infrastructure.Database
         {
             base.OnModelCreating(builder);
             // builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
+
             #region Data Seeding
 
             //JobStatus
@@ -87,6 +88,29 @@ namespace JobResearchSystem.Infrastructure.Database
                 .HasOne(r => r.ApplicantStatus)
                 .WithMany(u => u.Applicants)
                 .HasForeignKey(r => r.ApplicantStatusId);
+            });
+            #endregion
+
+            #region JobSeekerSkill
+            builder.Entity<JobSeekerSkill>(builder =>
+            {
+                builder
+                .HasKey(r => new { r.JobSeekerId, r.SkillId });
+
+                builder
+               .HasIndex(r => new { r.JobSeekerId, r.SkillId })
+               .IsUnique();
+
+                builder
+                .HasOne(r => r.JobSeeker)
+                .WithMany(u => u.JobSeekerSkills)
+                .HasForeignKey(r => r.JobSeekerId);
+
+                builder
+                .HasOne(r => r.Skill)
+                .WithMany(u => u.JobSeekerSkills)
+                .HasForeignKey(r => r.SkillId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
             #endregion
 

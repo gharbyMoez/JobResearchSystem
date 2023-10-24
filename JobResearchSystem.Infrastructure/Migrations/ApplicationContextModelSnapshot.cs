@@ -93,21 +93,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         {
                             Id = 1,
                             ApplicantStatusName = "Open",
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7911),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9286),
                             IsDeleted = false
                         },
                         new
                         {
                             Id = 2,
                             ApplicantStatusName = "Accepted",
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7926),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9314),
                             IsDeleted = false
                         },
                         new
                         {
                             Id = 3,
                             ApplicantStatusName = "Rejected",
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7934),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9336),
                             IsDeleted = false
                         });
                 });
@@ -191,7 +191,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Experiance", b =>
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Experience", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,7 +235,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.HasIndex("JobSeekerId");
 
-                    b.ToTable("Experiances");
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", b =>
@@ -417,6 +417,39 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.ToTable("JobSeekers");
                 });
 
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobSeekerSkill", b =>
+                {
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("JobSeekerId", "SkillId");
+
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("JobSeekerId", "SkillId")
+                        .IsUnique();
+
+                    b.ToTable("JobSeekerSkill");
+                });
+
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobStatus", b =>
                 {
                     b.Property<int>("Id")
@@ -449,21 +482,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7761),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9091),
                             IsDeleted = false,
                             JobStatusName = "Pending"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7853),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9211),
                             IsDeleted = false,
                             JobStatusName = "Published"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7862),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9224),
                             IsDeleted = false,
                             JobStatusName = "Rejected"
                         });
@@ -590,28 +623,28 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7979),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9406),
                             IsDeleted = false,
                             UserTypeName = "JobSeeker"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(7994),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9621),
                             IsDeleted = false,
                             UserTypeName = "Company"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(8001),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9657),
                             IsDeleted = false,
                             UserTypeName = "Admin"
                         },
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 10, 24, 23, 37, 59, 408, DateTimeKind.Local).AddTicks(8007),
+                            DateCreated = new DateTime(2023, 10, 25, 0, 54, 33, 995, DateTimeKind.Local).AddTicks(9667),
                             IsDeleted = false,
                             UserTypeName = "SuperAdmin"
                         });
@@ -788,10 +821,10 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Experiance", b =>
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Experience", b =>
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.JobSeeker", "JobSeeker")
-                        .WithMany("Experiances")
+                        .WithMany("Experiences")
                         .HasForeignKey("JobSeekerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -856,6 +889,25 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobSeekerSkill", b =>
+                {
+                    b.HasOne("JobResearchSystem.Domain.Entities.JobSeeker", "JobSeeker")
+                        .WithMany("JobSeekerSkills")
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JobResearchSystem.Domain.Entities.Skill", "Skill")
+                        .WithMany("JobSeekerSkills")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Qualification", b =>
@@ -951,7 +1003,9 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 {
                     b.Navigation("Applicants");
 
-                    b.Navigation("Experiances");
+                    b.Navigation("Experiences");
+
+                    b.Navigation("JobSeekerSkills");
 
                     b.Navigation("Qualifications");
 
@@ -961,6 +1015,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobStatus", b =>
                 {
                     b.Navigation("Jobs");
+                });
+
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Skill", b =>
+                {
+                    b.Navigation("JobSeekerSkills");
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.UserType", b =>

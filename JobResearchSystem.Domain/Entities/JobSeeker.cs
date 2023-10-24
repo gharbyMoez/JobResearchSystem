@@ -6,7 +6,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("JobSeekers")]
     public class JobSeeker : BaseEntity
     {
-        //public string Experiance { get; set; }
+        //public string Experience { get; set; }
         // public ICollection<string>? Skills { get; set; }
         //public string Qualification { get; set; }
         public string? CVFilePath { get; set; }
@@ -22,11 +22,15 @@ namespace JobResearchSystem.Domain.Entities
 
         //////////
 
-        public ICollection<Experiance>? Experiances { get; set; }
+        public ICollection<Experience>? Experiences { get; set; }
 
         //////////
 
         public ICollection<Qualification>? Qualifications { get; set; }
+
+        //////////  
+
+        public ICollection<JobSeekerSkill> JobSeekerSkills { get; set; }
 
         //////////
 

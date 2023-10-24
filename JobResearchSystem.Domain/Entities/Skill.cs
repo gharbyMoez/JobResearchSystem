@@ -9,6 +9,8 @@ namespace JobResearchSystem.Domain.Entities
 
         /*----- Relations -----*/
 
+        public ICollection<JobSeekerSkill> JobSeekerSkills { get; set; }
+
         [ForeignKey(nameof(JobSeeker))]
         public int? JobSeekerId { get; set; }
 

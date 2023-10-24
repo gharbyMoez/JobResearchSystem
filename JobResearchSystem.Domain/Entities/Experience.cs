@@ -2,8 +2,8 @@
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("Experiances")]
-    public class Experiance : BaseEntity
+    [Table("Experiences")]
+    public class Experience : BaseEntity
     {
         public string CompanyName { get; set; }
 

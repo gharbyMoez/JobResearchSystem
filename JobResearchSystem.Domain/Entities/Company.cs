@@ -18,7 +18,7 @@ namespace JobResearchSystem.Domain.Entities
 
         ////////////////
 
-        //public ICollection<Experiance>? Experiance { get; set; }//??
+        //public ICollection<Experience>? Experience { get; set; }//??
 
         ////////////////
 
