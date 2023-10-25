@@ -32,7 +32,7 @@ namespace JobResearchSystem.Infrastructure.Database
         override protected void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
+            builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
 
             #region Data Seeding
 

@@ -44,10 +44,12 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
                 await _appDbContext.SaveChangesAsync();
                 return "success";
             }
-            if (entity != null && entity.IsDeleted == true)
-            {
-                return " Doesn't Exist";
-            }
+            //By using the Query Filter if the item is soft deleted
+            //the entity above will be null so no need for the next if condition
+            //if (entity != null && entity.IsDeleted == true)
+            //{
+            //    return " Doesn't Exist";
+            //}
 
 
             return "Fails";
@@ -55,7 +57,7 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, object>>[] includes = null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
+            IQueryable<T> query = _appDbContext.Set<T>();//.Where(x => x.IsDeleted == false);//Query filter instead
 
             foreach (var include in includes)
             {
@@ -68,7 +70,7 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public virtual async Task<T> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
+            IQueryable<T> query = _appDbContext.Set<T>();//.Where(x => x.IsDeleted == false);//query filter instead
 
             foreach (var include in includes)
             {
