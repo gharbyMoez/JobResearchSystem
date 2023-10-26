@@ -3,9 +3,9 @@ using JobResearchSystem.Application.Feature.Skills.Commands.Models;
 
 namespace JobResearchSystem.Application.Feature.Skills.Commands.Validators
 {
-    public class UpdateSkillValidator : AbstractValidator<UpdateSkillCommand>
+    public class UpdateJobValidator : AbstractValidator<UpdateSkillCommand>
     {
-        public UpdateSkillValidator() { ApplyValidationsRules(); }
+        public UpdateJobValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
             RuleFor(x => x.Id)

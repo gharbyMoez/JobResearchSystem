@@ -33,6 +33,8 @@ namespace JobResearchSystem.Infrastructure.Database
         {
             base.OnModelCreating(builder);
             builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
+            builder.Entity<Job>().HasQueryFilter(s => !s.IsDeleted);
+
 
             #region Data Seeding
 
@@ -60,6 +62,7 @@ namespace JobResearchSystem.Infrastructure.Database
                 builder.HasData(new UserType { Id = 3, UserTypeName = "Admin" });
                 builder.HasData(new UserType { Id = 4, UserTypeName = "SuperAdmin" });
             });
+
 
             #endregion
 

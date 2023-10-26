@@ -4,6 +4,7 @@ using JobResearchSystem.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231026115757_JobMigrate")]
+    partial class JobMigrate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,21 +96,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         {
                             Id = 1,
                             ApplicantStatusName = "Open",
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1940),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5974),
                             IsDeleted = false
                         },
                         new
                         {
                             Id = 2,
                             ApplicantStatusName = "Accepted",
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1950),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5983),
                             IsDeleted = false
                         },
                         new
                         {
                             Id = 3,
                             ApplicantStatusName = "Rejected",
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1954),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5987),
                             IsDeleted = false
                         });
                 });
@@ -482,21 +485,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1843),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5872),
                             IsDeleted = false,
                             JobStatusName = "Pending"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1911),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5943),
                             IsDeleted = false,
                             JobStatusName = "Published"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1916),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(5948),
                             IsDeleted = false,
                             JobStatusName = "Rejected"
                         });
@@ -623,28 +626,28 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1978),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(6010),
                             IsDeleted = false,
                             UserTypeName = "JobSeeker"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1986),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(6016),
                             IsDeleted = false,
                             UserTypeName = "Company"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1991),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(6020),
                             IsDeleted = false,
                             UserTypeName = "Admin"
                         },
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 10, 26, 15, 1, 11, 298, DateTimeKind.Local).AddTicks(1994),
+                            DateCreated = new DateTime(2023, 10, 26, 14, 57, 57, 593, DateTimeKind.Local).AddTicks(6023),
                             IsDeleted = false,
                             UserTypeName = "SuperAdmin"
                         });

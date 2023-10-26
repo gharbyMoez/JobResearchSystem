@@ -1,5 +1,5 @@
-﻿using JobResearchSystem.Application.Feature.Skills.Commands.Models;
-using JobResearchSystem.Application.Feature.Skills.Queries.Models;
+﻿using JobResearchSystem.Application.Feature.Jobs.Commands.Models;
+using JobResearchSystem.Application.Feature.Jobs.Queries.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,26 +7,26 @@ namespace JobResearchSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillController : ControllerBase
+    public class JobController : ControllerBase
     {
         #region CTOR
         private readonly IMediator _mediator;
 
-        public SkillController(IMediator mediator)
+        public JobController(IMediator mediator)
         {
             _mediator = mediator;
         }
         #endregion
 
-        [HttpGet("GetAllSkills")]
-        public async Task<IActionResult> GetAllSkills()
+        [HttpGet("GetAllJobs")]
+        public async Task<IActionResult> GetAllJobs()
         {
             var result = await _mediator.Send(new GetAllJobsQuery());
             return Ok(result);
         }
 
-        [HttpGet("GetSkillById")]
-        public async Task<IActionResult> GetSkillById([FromQuery] GetJobByIdQuery query)
+        [HttpGet("GetJobById")]
+        public async Task<IActionResult> GetJobById([FromQuery] GetJobByIdQuery query)
         {
             var result = await _mediator.Send(query);
             if (result == null)
@@ -37,22 +37,22 @@ namespace JobResearchSystem.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("AddSkill")]
-        public async Task<IActionResult> AddSkill(AddSkillCommand command)
+        [HttpPost("AddJob")]
+        public async Task<IActionResult> AddJob(AddJobCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpPut("UpdateSkill")]
-        public async Task<IActionResult> UpdateSkill(UpdateSkillCommand command)
+        [HttpPut("UpdateJob")]
+        public async Task<IActionResult> UpdateJob(UpdateJobCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
-        [HttpDelete("RemoveSkill")]
-        public async Task<IActionResult> RemoveSkill(DeleteSkillCommand command)
+        [HttpDelete("RemoveJob")]
+        public async Task<IActionResult> RemoveJob(DeleteJobCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
-using JobResearchSystem.Application.Feature.Skills.Commands.Models;
+using JobResearchSystem.Application.Feature.Jobs.Commands.Models;
 
-namespace JobResearchSystem.Application.Feature.Skills.Commands.Validators
+namespace JobResearchSystem.Application.Feature.Jobs.Commands.Validators
 {
-    public class DeleteJobValidator : AbstractValidator<DeleteSkillCommand>
+    public class DeleteJobValidator : AbstractValidator<DeleteJobCommand>
     {
         public DeleteJobValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
 
-            RuleFor(x => x.SkillId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
         }

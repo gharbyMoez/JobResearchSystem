@@ -13,6 +13,8 @@ namespace JobResearchSystem.Application
         public static IServiceCollection AddApplicationDependeicies(this IServiceCollection services)
         {
             services.AddTransient<ISkillService, SkillService>();
+            services.AddTransient<IJobService, JobService>();
+
 
 
 

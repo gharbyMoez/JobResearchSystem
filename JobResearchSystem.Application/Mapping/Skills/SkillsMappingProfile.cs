@@ -5,12 +5,12 @@ using JobResearchSystem.Domain.Entities;
 
 namespace JobResearchSystem.Application.Mapping.Skills
 {
-    public class SkillsMappingProfile : Profile
+    public class JobsMappingProfile : Profile
     {
-        public SkillsMappingProfile()
+        public JobsMappingProfile()
         {
-            CreateMap<Skill, GetSkillResponse>();
-            CreateMap<UpdateSkillCommand, GetSkillResponse>();
+            CreateMap<Skill, GetJobResponse>();
+            CreateMap<UpdateSkillCommand, GetJobResponse>();
 
             CreateMap<AddSkillCommand, Skill>();
 

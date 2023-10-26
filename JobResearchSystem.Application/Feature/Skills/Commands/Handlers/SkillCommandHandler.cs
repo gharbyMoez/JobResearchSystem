@@ -11,7 +11,7 @@ namespace JobResearchSystem.Application.Feature.Skills.Commands.Handlers
     public class SkillCommandHandler : ResponseHandler,
                                        IRequestHandler<AddSkillCommand, Response<string>>,
                                        IRequestHandler<DeleteSkillCommand, Response<string>>,
-                                       IRequestHandler<UpdateSkillCommand, Response<GetSkillResponse>>
+                                       IRequestHandler<UpdateSkillCommand, Response<GetJobResponse>>
     {
         #region CTOR
         private ISkillService _skillService;
@@ -33,13 +33,13 @@ namespace JobResearchSystem.Application.Feature.Skills.Commands.Handlers
             else { return Created(" Skill Added Successfully"); }
         }
 
-        public async Task<Response<GetSkillResponse>> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
+        public async Task<Response<GetJobResponse>> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
         {
             var skill = _mapper.Map<Skill>(request);
             var result = await _skillService.UpdateSkillAsync(skill);
-            var resultDto = _mapper.Map<GetSkillResponse>(request);
-            if (resultDto == null) { return BadRequest<GetSkillResponse>(""); }
-            else { return Success<GetSkillResponse>(resultDto); }
+            var resultDto = _mapper.Map<GetJobResponse>(request);
+            if (resultDto == null) { return BadRequest<GetJobResponse>(""); }
+            else { return Success<GetJobResponse>(resultDto); }
         }
 
         public async Task<Response<string>> Handle(DeleteSkillCommand request, CancellationToken cancellationToken)

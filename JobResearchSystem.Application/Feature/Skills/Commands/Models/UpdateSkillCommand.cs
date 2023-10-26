@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobResearchSystem.Application.Feature.Skills.Commands.Models
 {
-    public class UpdateSkillCommand : IRequest<Response<GetSkillResponse>>
+    public class UpdateSkillCommand : IRequest<Response<GetJobResponse>>
     {
         public int Id { get; set; }
         public string SkillName { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace JobResearchSystem.Application.Feature.Skills.Queries.Response
 {
-    public class GetSkillResponse
+    public class GetJobResponse
     {
         public string SkillName { get; set; }
     }
