@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
     [Table("JobStatus")]
     public class JobStatus : BaseEntity
     {
-
+        [Key]
+        public int JobStatusId { get; set; }
         public string JobStatusName { get; set; }
 
         /*----- Relations -----*/

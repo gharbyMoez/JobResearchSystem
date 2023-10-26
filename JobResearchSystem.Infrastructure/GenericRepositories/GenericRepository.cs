@@ -68,16 +68,15 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public virtual async Task<T> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
+            IQueryable<T> query = _appDbContext.Set<T>();
 
             foreach (var include in includes)
             {
                 query = query.Include(include);
             }
 
-            var entity = await query.FirstOrDefaultAsync(x => x.Id == id);
-
-
+            // var entity = await query.FirstOrDefaultAsync(x => x. == id);
+            var entity = _appDbContext.Set<T>().Find(id);
 
 
             return entity;

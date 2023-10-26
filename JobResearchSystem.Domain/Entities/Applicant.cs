@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
     [Table("Applicants")]
     public class Applicant : BaseEntity
     {
+        [Key]
+        public int ApplicantId { get; set; }
 
         /*----- Relations -----*/
 
