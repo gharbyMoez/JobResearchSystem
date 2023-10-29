@@ -38,25 +38,25 @@ namespace JobResearchSystem.Infrastructure.Database
             //JobStatus
             builder.Entity<JobStatus>(builder =>
             {
-                builder.HasData(new JobStatus { JobStatusId = 1, JobStatusName = "Pending" });
-                builder.HasData(new JobStatus { JobStatusId = 2, JobStatusName = "Published" });
-                builder.HasData(new JobStatus { JobStatusId = 3, JobStatusName = "Rejected" });
+                builder.HasData(new JobStatus { Id = 1, JobStatusName = "Pending" });
+                builder.HasData(new JobStatus { Id = 2, JobStatusName = "Published" });
+                builder.HasData(new JobStatus { Id = 3, JobStatusName = "Rejected" });
             });
 
             //ApplicantStatus
             builder.Entity<ApplicantStatus>(builder =>
             {
-                builder.HasData(new ApplicantStatus { ApplicantStatusId = 1, ApplicantStatusName = "Open" });
-                builder.HasData(new ApplicantStatus { ApplicantStatusId = 2, ApplicantStatusName = "Accepted" });
-                builder.HasData(new ApplicantStatus { ApplicantStatusId = 3, ApplicantStatusName = "Rejected" });
+                builder.HasData(new ApplicantStatus { Id = 1, ApplicantStatusName = "Open" });
+                builder.HasData(new ApplicantStatus { Id = 2, ApplicantStatusName = "Accepted" });
+                builder.HasData(new ApplicantStatus { Id = 3, ApplicantStatusName = "Rejected" });
             });
 
             //UserType
             builder.Entity<UserType>(builder =>
             {
-                builder.HasData(new UserType { UserTypeId = 1, UserTypeName = "JobSeeker" });
-                builder.HasData(new UserType { UserTypeId = 2, UserTypeName = "Company" });
-                builder.HasData(new UserType { UserTypeId = 3, UserTypeName = "SystemAdminstrators" });
+                builder.HasData(new UserType { Id = 1, UserTypeName = "JobSeeker" });
+                builder.HasData(new UserType { Id = 2, UserTypeName = "Company" });
+                builder.HasData(new UserType { Id = 3, UserTypeName = "SystemAdminstrators" });
             });
 
             #endregion

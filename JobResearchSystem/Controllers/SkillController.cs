@@ -7,55 +7,44 @@ namespace JobResearchSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SkillController : ControllerBase
+    public class SkillController : ApiBaseController
     {
-        #region CTOR
-        private readonly IMediator _mediator;
-
-        public SkillController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-        #endregion
+        
 
         [HttpGet("GetAllSkills")]
         public async Task<IActionResult> GetAllSkills()
         {
-            var result = await _mediator.Send(new GetAllSkillsQuery());
-            return Ok(result);
+            var result = await Mediator.Send(new GetAllSkillsQuery());
+            return NewResult(result);
         }
 
         [HttpGet("GetSkillById")]
         public async Task<IActionResult> GetSkillById([FromQuery] GetSkillByIdQuery query)
         {
-            var result = await _mediator.Send(query);
-            if (result == null)
-            {
-                // Handle not found
-                return NotFound();
-            }
-            return Ok(result);
+            var result = await Mediator.Send(query);
+
+            return NewResult(result);
         }
 
         [HttpPost("AddSkill")]
         public async Task<IActionResult> AddSkill(AddSkillCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            var result = await Mediator.Send(command);
+            return NewResult(result);
         }
 
         [HttpPut("UpdateSkill")]
         public async Task<IActionResult> UpdateSkill(UpdateSkillCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            var result = await Mediator.Send(command);
+            return NewResult(result);
         }
 
         [HttpDelete("RemoveSkill")]
         public async Task<IActionResult> RemoveSkill(DeleteSkillCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            var result = await Mediator.Send(command);
+            return NewResult(result);
         }
 
     }

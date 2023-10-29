@@ -1,7 +1,11 @@
-﻿namespace JobResearchSystem.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace JobResearchSystem.Domain.Entities
 {
     public class BaseEntity
     {
+        [Key]
+        public int Id { get; set; }
 
         // common attributes
         public DateTime DateCreated { get; set; } = DateTime.Now;

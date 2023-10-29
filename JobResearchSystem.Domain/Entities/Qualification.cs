@@ -6,8 +6,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("Qualifications")]
     public class Qualification : BaseEntity
     {
-        [Key]
-        public int QualificationId { get; set; }
+        
         public string SchoolName { get; set; }
         public string? Degree { get; set; }
         public string? FieldOfStudy { get; set; }

@@ -6,8 +6,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("JobStatus")]
     public class JobStatus : BaseEntity
     {
-        [Key]
-        public int JobStatusId { get; set; }
+        
         public string JobStatusName { get; set; }
 
         /*----- Relations -----*/

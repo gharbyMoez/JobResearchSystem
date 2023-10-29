@@ -6,8 +6,6 @@ namespace JobResearchSystem.Domain.Entities
     [Table("Experiances")]
     public class Experience : BaseEntity
     {
-        [Key]
-        public int ExperianceId { get; set; }
         public string ExperianceCompanyName { get; set; }
 
         public string ExperianceTitle { get; set; }

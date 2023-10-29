@@ -6,8 +6,6 @@ namespace JobResearchSystem.Domain.Entities
     [Table("Categories")]
     public class Category : BaseEntity
     {
-        [Key]
-        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         //public int CategoryParentId { get; set; }
         public string? Description { get; set; }

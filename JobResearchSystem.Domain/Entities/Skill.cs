@@ -6,8 +6,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("Skills")]
     public class Skill : BaseEntity
     {
-        [Key]
-        public int SkillId { get; set; }
+        
         public string SkillName { get; set; }
 
         /*----- Relations -----*/

@@ -7,8 +7,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("UserTypes")]
     public class UserType : BaseEntity
     {
-        [Key]
-        public int UserTypeId { get; set; }
+        
         public string UserTypeName { get; set; }
 
         /*----- Relations -----*/

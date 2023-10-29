@@ -7,8 +7,7 @@ namespace JobResearchSystem.Domain.Entities
     [Table("JobSeekers")]
     public class JobSeeker : BaseEntity
     {
-        [Key]
-        public int JobSeekerId { get; set; }
+       
         public string? CVFilePath { get; set; }
         public string? ImageFilePath { get; set; }
 

@@ -6,8 +6,6 @@ namespace JobResearchSystem.Domain.Entities
     [Table("Applicants")]
     public class Applicant : BaseEntity
     {
-        [Key]
-        public int ApplicantId { get; set; }
 
         /*----- Relations -----*/
 
