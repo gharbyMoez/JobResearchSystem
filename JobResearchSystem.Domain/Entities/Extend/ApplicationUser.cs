@@ -6,7 +6,6 @@ namespace JobResearchSystem.Domain.Entities.Extend
     public class ApplicationUser : IdentityUser
     {
 
-
         /*----- Relations -----*/
 
         //[ForeignKey(nameof(JobSeeker))]
@@ -21,7 +20,6 @@ namespace JobResearchSystem.Domain.Entities.Extend
 
         //////////////////
 
-        [ForeignKey(nameof(UserType))]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobResearchSystem.Application.IService
 {
+    // not needed (we use generic service)
     public class BaseService
     {
         #region CTOR

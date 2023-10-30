@@ -1,5 +1,6 @@
 ﻿using JobResearchSystem.Infrastructure.GenericRepositories;
 using JobResearchSystem.Infrastructure.Repositories.SkillRepositories;
+using JobResearchSystem.Infrastructure.Repositories.UserTypeRepositories;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
 using Microsoft.Extensions.DependencyInjection;
 

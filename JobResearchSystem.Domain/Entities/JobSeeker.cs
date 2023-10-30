@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("JobSeekers")]
     public class JobSeeker : BaseEntity
     {
        
@@ -30,7 +29,6 @@ namespace JobResearchSystem.Domain.Entities
 
         //////////
 
-        [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
     }

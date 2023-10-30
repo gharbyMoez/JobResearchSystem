@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("Jobs")]
     public class Job : BaseEntity
     {
         public string Title { get; set; }
@@ -20,7 +19,6 @@ namespace JobResearchSystem.Domain.Entities
 
         /*----- Relations -----*/
 
-        [ForeignKey(nameof(Company))]
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 
@@ -30,13 +28,11 @@ namespace JobResearchSystem.Domain.Entities
 
         ////////////////
 
-        [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
         ////////////////
 
-        [ForeignKey(nameof(JobStatus))]
         public int? JobStatusId { get; set; } = 1;
         public JobStatus? JobStatus { get; set; }
     }

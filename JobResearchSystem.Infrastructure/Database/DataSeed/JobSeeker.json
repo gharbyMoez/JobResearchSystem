@@ -1,0 +1,27 @@
+[
+  {
+    "CVFilePath": "/some/path/file",
+    "ImageFilePath": "/some/path/image",
+    "UserId": "user1"
+  },
+  {
+    "CVFilePath": "/some/path/file",
+    "ImageFilePath": "/some/path/image",
+    "UserId": "user2"
+  },
+  {
+    "CVFilePath": "/some/path/file",
+    "ImageFilePath": "/some/path/image",
+    "UserId": "user3"
+  },
+  {
+    "CVFilePath": "/some/path/file",
+    "ImageFilePath": "/some/path/image",
+    "UserId": "user4"
+  },
+  {
+    "CVFilePath": "/some/path/file",
+    "ImageFilePath": "/some/path/image",
+    "UserId": "user5"
+  }
+]

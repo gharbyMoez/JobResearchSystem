@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("JobStatus")]
     public class JobStatus : BaseEntity
     {
         
@@ -11,6 +10,6 @@ namespace JobResearchSystem.Domain.Entities
 
         /*----- Relations -----*/
 
-        public ICollection<Job>? Jobs { get; set; }
+        public ICollection<Job> Jobs { get; set; } = new List<Job>();
     }
 }

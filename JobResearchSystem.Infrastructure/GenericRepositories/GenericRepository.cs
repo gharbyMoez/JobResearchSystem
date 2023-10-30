@@ -16,25 +16,23 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
         }
 
 
-        public virtual async Task<string> CreateAsync(T entity)
+        public virtual async Task<T?> CreateAsync(T entity)
         {
             await _appDbContext.Set<T>().AddAsync(entity);
-            await _appDbContext.SaveChangesAsync();
-            return "success";
-        }
-
-        public virtual async Task<T> UpdateAsync(T entity)
-        {
-
-            _appDbContext.Entry(entity).State = EntityState.Modified;
-            await _appDbContext.SaveChangesAsync();
+            //await _appDbContext.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task<string> DeleteAsync(int id)
+        public virtual async Task<T?> UpdateAsync(T entity)
+        {
+            _appDbContext.Entry(entity).State = EntityState.Modified;
+            //await _appDbContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public virtual async Task<bool> DeleteAsync(int id)
         {
             var entity = await _appDbContext.Set<T>().FindAsync(id);
-
 
             if (entity != null && entity.IsDeleted == false)
             {
@@ -42,15 +40,14 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
                 entity.DateDeleted = DateTime.Now;
                 //_appDbContext.Entry(entity).State = EntityState.Deleted;
                 await _appDbContext.SaveChangesAsync();
-                return "success";
+                return true;
             }
             if (entity != null && entity.IsDeleted == true)
             {
-                return " Doesn't Exist";
+                return false;
             }
 
-
-            return "Fails";
+            return false;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, object>>[] includes = null)
@@ -66,19 +63,16 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         }
 
-        public virtual async Task<T> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
+        public virtual async Task<T?> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>();
+            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
 
             foreach (var include in includes)
             {
                 query = query.Include(include);
             }
 
-            // var entity = await query.FirstOrDefaultAsync(x => x. == id);
-            var entity = _appDbContext.Set<T>().Find(id);
-
-
+            var entity = await query.FirstOrDefaultAsync(x => x.Id == id);
             return entity;
         }
     }

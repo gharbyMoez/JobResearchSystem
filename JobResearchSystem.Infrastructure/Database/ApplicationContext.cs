@@ -4,6 +4,7 @@ using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Domain.Entities.Extend;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace JobResearchSystem.Infrastructure.Database
 {
@@ -32,72 +33,77 @@ namespace JobResearchSystem.Infrastructure.Database
         override protected void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
-            #region Data Seeding
+            //builder.Entity<Skill>().HasQueryFilter(s => !s.IsDeleted);
 
-            //JobStatus
-            builder.Entity<JobStatus>(builder =>
-            {
-                builder.HasData(new JobStatus { Id = 1, JobStatusName = "Pending" });
-                builder.HasData(new JobStatus { Id = 2, JobStatusName = "Published" });
-                builder.HasData(new JobStatus { Id = 3, JobStatusName = "Rejected" });
-            });
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            //ApplicantStatus
-            builder.Entity<ApplicantStatus>(builder =>
-            {
-                builder.HasData(new ApplicantStatus { Id = 1, ApplicantStatusName = "Open" });
-                builder.HasData(new ApplicantStatus { Id = 2, ApplicantStatusName = "Accepted" });
-                builder.HasData(new ApplicantStatus { Id = 3, ApplicantStatusName = "Rejected" });
-            });
+            #region commented
+            //#region Data Seeding
 
-            //UserType
-            builder.Entity<UserType>(builder =>
-            {
-                builder.HasData(new UserType { Id = 1, UserTypeName = "JobSeeker" });
-                builder.HasData(new UserType { Id = 2, UserTypeName = "Company" });
-                builder.HasData(new UserType { Id = 3, UserTypeName = "SystemAdminstrators" });
-            });
+            ////JobStatus
+            //builder.Entity<JobStatus>(builder =>
+            //{
+            //    builder.HasData(new JobStatus { Id = 1, JobStatusName = "Pending" });
+            //    builder.HasData(new JobStatus { Id = 2, JobStatusName = "Published" });
+            //    builder.HasData(new JobStatus { Id = 3, JobStatusName = "Rejected" });
+            //});
 
-            #endregion
+            ////ApplicantStatus
+            //builder.Entity<ApplicantStatus>(builder =>
+            //{
+            //    builder.HasData(new ApplicantStatus { Id = 1, ApplicantStatusName = "Open" });
+            //    builder.HasData(new ApplicantStatus { Id = 2, ApplicantStatusName = "Accepted" });
+            //    builder.HasData(new ApplicantStatus { Id = 3, ApplicantStatusName = "Rejected" });
+            //});
 
-            #region Applicant Table 
-            builder.Entity<Applicant>(builder =>
-            {
-                builder
-                .HasKey(r => new { r.JobSeekerId, r.JobId });
+            ////UserType
+            //builder.Entity<UserType>(builder =>
+            //{
+            //    builder.HasData(new UserType { Id = 1, UserTypeName = "JobSeeker" });
+            //    builder.HasData(new UserType { Id = 2, UserTypeName = "Company" });
+            //    builder.HasData(new UserType { Id = 3, UserTypeName = "SystemAdministrators" });
+            //});
 
-                builder
-               .HasIndex(r => new { r.JobSeekerId, r.JobId })
-               .IsUnique();
+            //#endregion
 
-                builder
-                .HasOne(r => r.JobSeeker)
-                .WithMany(u => u.Applicants)
-                .HasForeignKey(r => r.JobSeekerId);
+            //#region Applicant Table 
+            //builder.Entity<Applicant>(builder =>
+            //{
+            //    builder
+            //    .HasKey(r => new { r.JobSeekerId, r.JobId });
 
-                builder
-                .HasOne(r => r.Job)
-                .WithMany(u => u.Applicants)
-                .HasForeignKey(r => r.JobId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //    builder
+            //   .HasIndex(r => new { r.JobSeekerId, r.JobId })
+            //   .IsUnique();
 
-                builder
-                .HasOne(r => r.ApplicantStatus)
-                .WithMany(u => u.Applicants)
-                .HasForeignKey(r => r.ApplicantStatusId);
-            });
-            #endregion
+            //    builder
+            //    .HasOne(r => r.JobSeeker)
+            //    .WithMany(u => u.Applicants)
+            //    .HasForeignKey(r => r.JobSeekerId);
 
-            #region ApplicationUser Table 
-            builder.Entity<ApplicationUser>(builder =>
-            {
+            //    builder
+            //    .HasOne(r => r.Job)
+            //    .WithMany(u => u.Applicants)
+            //    .HasForeignKey(r => r.JobId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
-                builder
-                .HasOne(r => r.UserType)
-                .WithMany(u => u.Users)
-                .HasForeignKey(r => r.UserTypeId).OnDelete(DeleteBehavior.NoAction);
-            });
+            //    builder
+            //    .HasOne(r => r.ApplicantStatus)
+            //    .WithMany(u => u.Applicants)
+            //    .HasForeignKey(r => r.ApplicantStatusId);
+            //});
+            //#endregion
+
+            //#region ApplicationUser Table 
+            //builder.Entity<ApplicationUser>(builder =>
+            //{
+
+            //    builder
+            //    .HasOne(r => r.UserType)
+            //    .WithMany(u => u.Users)
+            //    .HasForeignKey(r => r.UserTypeId).OnDelete(DeleteBehavior.NoAction);
+            //});
+            //#endregion
             #endregion
 
 

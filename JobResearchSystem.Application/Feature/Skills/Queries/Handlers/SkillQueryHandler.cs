@@ -24,7 +24,7 @@ namespace JobResearchSystem.Application.Feature.Skills.Queries.Handlers
 
         public async Task<Response<IEnumerable<GetSkillResponse>>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
-            var entitiesList = await _skillService.GetAllSkillsAsync();
+            var entitiesList = await _skillService.GetAllAsync();
             if (entitiesList == null)
             {
                 return NotFound<IEnumerable<GetSkillResponse>>();
@@ -41,7 +41,7 @@ namespace JobResearchSystem.Application.Feature.Skills.Queries.Handlers
 
         public async Task<Response<GetSkillResponse>> Handle(GetSkillByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _skillService.GetSkillByIdAsync(request.SkillId);
+            var entity = await _skillService.GetByIdAsync(request.SkillId);
 
             if (entity == null)
             {

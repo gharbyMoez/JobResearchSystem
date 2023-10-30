@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231026182644_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20231030173457_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("JobId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ApplicantId")
                         .HasColumnType("int");
 
                     b.Property<int>("ApplicantStatusId")
@@ -63,20 +60,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.HasIndex("JobSeekerId", "JobId")
                         .IsUnique();
 
-                    b.ToTable("Applicants");
+                    b.ToTable("Applicants", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.ApplicantStatus", b =>
                 {
-                    b.Property<int>("ApplicantStatusId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicantStatusId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicantStatusName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -87,54 +85,26 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("ApplicantStatusId");
+                    b.HasKey("Id");
 
-                    b.ToTable("ApplicantStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            ApplicantStatusId = 1,
-                            ApplicantStatusName = "Open",
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3143),
-                            Id = 0,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            ApplicantStatusId = 2,
-                            ApplicantStatusName = "Accepted",
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3162),
-                            Id = 0,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            ApplicantStatusId = 3,
-                            ApplicantStatusName = "Rejected",
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3171),
-                            Id = 0,
-                            IsDeleted = false
-                        });
+                    b.ToTable("ApplicantStatuses", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -148,31 +118,30 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Company", b =>
                 {
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -182,9 +151,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -193,29 +159,34 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("CompanyId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Experience", b =>
                 {
-                    b.Property<int>("ExperianceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExperianceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -226,22 +197,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ExperianceCompanyName")
+                    b.Property<string>("ExperienceCompanyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("ExperianceEndDate")
+                    b.Property<DateTime?>("ExperienceEndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ExperianceStartDate")
+                    b.Property<DateTime?>("ExperienceStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ExperianceTitle")
+                    b.Property<string>("ExperienceTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -250,13 +220,14 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PositionDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ExperianceId");
+                    b.HasKey("Id");
 
                     b.HasIndex("JobSeekerId");
 
-                    b.ToTable("Experiances");
+                    b.ToTable("Experiences", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", b =>
@@ -331,11 +302,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Job", b =>
                 {
-                    b.Property<int>("JobId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("ApplicantsNumber")
                         .HasColumnType("int");
@@ -356,10 +327,8 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -368,22 +337,24 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PublishDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("RangeSalaryMax")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("RangeSalaryMax")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double?>("RangeSalaryMin")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("RangeSalaryMin")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("JobId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
@@ -391,16 +362,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.HasIndex("JobStatusId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Jobs", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobSeeker", b =>
                 {
-                    b.Property<int>("JobSeekerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobSeekerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CVFilePath")
                         .HasColumnType("nvarchar(max)");
@@ -414,9 +385,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageFilePath")
                         .HasColumnType("nvarchar(max)");
 
@@ -427,20 +395,21 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("JobSeekerId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("JobSeekers");
+                    b.ToTable("JobSeekers", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobStatus", b =>
                 {
-                    b.Property<int>("JobStatusId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobStatusId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -451,9 +420,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -461,44 +427,18 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("JobStatusId");
+                    b.HasKey("Id");
 
-                    b.ToTable("JobStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            JobStatusId = 1,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(2931),
-                            Id = 0,
-                            IsDeleted = false,
-                            JobStatusName = "Pending"
-                        },
-                        new
-                        {
-                            JobStatusId = 2,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3071),
-                            Id = 0,
-                            IsDeleted = false,
-                            JobStatusName = "Published"
-                        },
-                        new
-                        {
-                            JobStatusId = 3,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3081),
-                            Id = 0,
-                            IsDeleted = false,
-                            JobStatusName = "Rejected"
-                        });
+                    b.ToTable("JobStatuses", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Qualification", b =>
                 {
-                    b.Property<int>("QualificationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QualificationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -512,25 +452,23 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Duration")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("Duration")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Grade")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<decimal?>("Grade")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("JobSeekerId")
+                    b.Property<int>("JobSeekerId")
                         .HasColumnType("int");
 
                     b.Property<string>("QualificationDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("QualificationEndDate")
@@ -541,22 +479,23 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.Property<string>("SchoolName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("QualificationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("JobSeekerId");
 
-                    b.ToTable("Qualifications");
+                    b.ToTable("Qualifications", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Skill", b =>
                 {
-                    b.Property<int>("SkillId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -566,29 +505,27 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("SkillName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("SkillId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.UserType", b =>
                 {
-                    b.Property<int>("UserTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -599,66 +536,30 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserTypeName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("UserTypeId");
+                    b.HasKey("Id");
 
-                    b.ToTable("UserTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            UserTypeId = 1,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3216),
-                            Id = 0,
-                            IsDeleted = false,
-                            UserTypeName = "JobSeeker"
-                        },
-                        new
-                        {
-                            UserTypeId = 2,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3232),
-                            Id = 0,
-                            IsDeleted = false,
-                            UserTypeName = "Company"
-                        },
-                        new
-                        {
-                            UserTypeId = 3,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3240),
-                            Id = 0,
-                            IsDeleted = false,
-                            UserTypeName = "Admin"
-                        },
-                        new
-                        {
-                            UserTypeId = 4,
-                            DateCreated = new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3248),
-                            Id = 0,
-                            IsDeleted = false,
-                            UserTypeName = "SuperAdmin"
-                        });
+                    b.ToTable("UserTypes", (string)null);
                 });
 
             modelBuilder.Entity("JobSeekerSkill", b =>
                 {
-                    b.Property<int>("JobSeekersJobSeekerId")
+                    b.Property<int>("JobSeekersId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SkillsSkillId")
+                    b.Property<int>("SkillsId")
                         .HasColumnType("int");
 
-                    b.HasKey("JobSeekersJobSeekerId", "SkillsSkillId");
+                    b.HasKey("JobSeekersId", "SkillsId");
 
-                    b.HasIndex("SkillsSkillId");
+                    b.HasIndex("SkillsId");
 
                     b.ToTable("JobSeekerSkill");
                 });
@@ -801,7 +702,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.HasOne("JobResearchSystem.Domain.Entities.ApplicantStatus", "ApplicantStatus")
                         .WithMany("Applicants")
                         .HasForeignKey("ApplicantStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobResearchSystem.Domain.Entities.Job", "Job")
@@ -813,7 +714,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.HasOne("JobResearchSystem.Domain.Entities.JobSeeker", "JobSeeker")
                         .WithMany("Applicants")
                         .HasForeignKey("JobSeekerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ApplicantStatus");
@@ -826,9 +727,9 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Company", b =>
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Company")
+                        .HasForeignKey("JobResearchSystem.Domain.Entities.Company", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -861,18 +762,19 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.HasOne("JobResearchSystem.Domain.Entities.Category", "Category")
                         .WithMany("Jobs")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobResearchSystem.Domain.Entities.Company", "Company")
                         .WithMany("Jobs")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JobResearchSystem.Domain.Entities.JobStatus", "JobStatus")
                         .WithMany("Jobs")
-                        .HasForeignKey("JobStatusId");
+                        .HasForeignKey("JobStatusId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Category");
 
@@ -884,8 +786,8 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobSeeker", b =>
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("JobSeeker")
+                        .HasForeignKey("JobResearchSystem.Domain.Entities.JobSeeker", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -896,7 +798,9 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.JobSeeker", "JobSeeker")
                         .WithMany("Qualifications")
-                        .HasForeignKey("JobSeekerId");
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("JobSeeker");
                 });
@@ -905,13 +809,13 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.JobSeeker", null)
                         .WithMany()
-                        .HasForeignKey("JobSeekersJobSeekerId")
+                        .HasForeignKey("JobSeekersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("JobResearchSystem.Domain.Entities.Skill", null)
                         .WithMany()
-                        .HasForeignKey("SkillsSkillId")
+                        .HasForeignKey("SkillsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -980,6 +884,13 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Company", b =>
                 {
                     b.Navigation("Jobs");
+                });
+
+            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", b =>
+                {
+                    b.Navigation("Company");
+
+                    b.Navigation("JobSeeker");
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Job", b =>

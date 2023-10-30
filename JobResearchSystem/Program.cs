@@ -25,6 +25,24 @@ builder.Services
 
 var app = builder.Build();
 
+using var scope = app.Services.CreateScope();
+
+var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+
+var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+
+try
+{
+    await dbContext.Database.MigrateAsync();
+
+    await AppContextSeed.SeedAsync(dbContext);
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogError(ex, "Database updating failed !");
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

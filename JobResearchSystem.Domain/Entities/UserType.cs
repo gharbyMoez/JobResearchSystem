@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("UserTypes")]
     public class UserType : BaseEntity
     {
         

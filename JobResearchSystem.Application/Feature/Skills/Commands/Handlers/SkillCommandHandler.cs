@@ -27,30 +27,34 @@ namespace JobResearchSystem.Application.Feature.Skills.Commands.Handlers
         public async Task<Response<string>> Handle(AddSkillCommand request, CancellationToken cancellationToken)
         {
             var movie = _mapper.Map<Skill>(request);
-            var result = await _skillService.AddSkillAsync(movie);
-            if (result != "success")
-            { return BadRequest<string>("Something Went Wrong"); }
-            else { return Created(" Skill Added Successfully"); }
+            var result = await _skillService.CreateAsync(movie);
+
+            if (result is null)
+                return BadRequest<string>("Something Went Wrong");
+
+            return Created(" Skill Added Successfully");
         }
 
         public async Task<Response<GetSkillResponse>> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
         {
             var skill = _mapper.Map<Skill>(request);
-            var result = await _skillService.UpdateSkillAsync(skill);
+
+            var result = await _skillService.UpdateAsync(skill);
+
             var resultDto = _mapper.Map<GetSkillResponse>(request);
+
             if (resultDto == null) { return BadRequest<GetSkillResponse>(""); }
             else { return Success<GetSkillResponse>(resultDto); }
         }
 
         public async Task<Response<string>> Handle(DeleteSkillCommand request, CancellationToken cancellationToken)
         {
-            var result = await _skillService.DeleteSkillAsync(request.SkillId);
+            var result = await _skillService.DeleteAsync(request.SkillId);
 
-            if (result != "success")
-            {
+            if (!result) 
                 return BadRequest<string>("");
-            }
-            else { return Deleted<string>(result); }
+            
+            return Deleted<string>(""); 
         }
 
     }

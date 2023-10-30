@@ -3,24 +3,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabase : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ApplicantStatus",
+                name: "ApplicantStatuses",
                 columns: table => new
                 {
-                    ApplicantStatusId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicantStatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    ApplicantStatusName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -28,7 +25,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicantStatus", x => x.ApplicantStatusId);
+                    table.PrimaryKey("PK_ApplicantStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,11 +46,10 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -61,17 +57,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobStatus",
+                name: "JobStatuses",
                 columns: table => new
                 {
-                    JobStatusId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     JobStatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -79,17 +74,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobStatus", x => x.JobStatusId);
+                    table.PrimaryKey("PK_JobStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SkillName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    SkillName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -97,17 +91,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Skills", x => x.SkillId);
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserTypes",
                 columns: table => new
                 {
-                    UserTypeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    UserTypeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -115,7 +108,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTypes", x => x.UserTypeId);
+                    table.PrimaryKey("PK_UserTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,7 +160,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         name: "FK_AspNetUsers_UserTypes_UserTypeId",
                         column: x => x.UserTypeId,
                         principalTable: "UserTypes",
-                        principalColumn: "UserTypeId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -259,15 +252,14 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     NumberOfJobs = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Website = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -275,25 +267,23 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Companies_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "JobSeekers",
                 columns: table => new
                 {
-                    JobSeekerId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CVFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -301,7 +291,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobSeekers", x => x.JobSeekerId);
+                    table.PrimaryKey("PK_JobSeekers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_JobSeekers_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -314,19 +304,18 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Jobs",
                 columns: table => new
                 {
-                    JobId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApplicantsNumber = table.Column<int>(type: "int", nullable: true),
                     PublishDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RangeSalaryMin = table.Column<double>(type: "float", nullable: true),
-                    RangeSalaryMax = table.Column<double>(type: "float", nullable: true),
+                    RangeSalaryMin = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    RangeSalaryMax = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     JobStatusId = table.Column<int>(type: "int", nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -334,39 +323,36 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Jobs", x => x.JobId);
+                    table.PrimaryKey("PK_Jobs", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Jobs_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Jobs_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Jobs_JobStatus_JobStatusId",
+                        name: "FK_Jobs_JobStatuses_JobStatusId",
                         column: x => x.JobStatusId,
-                        principalTable: "JobStatus",
-                        principalColumn: "JobStatusId");
+                        principalTable: "JobStatuses",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Experiances",
+                name: "Experiences",
                 columns: table => new
                 {
-                    ExperianceId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExperianceCompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExperianceTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExperianceStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExperianceEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PositionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExperienceCompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ExperienceTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ExperienceStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExperienceEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PositionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobSeekerId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -374,12 +360,12 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Experiances", x => x.ExperianceId);
+                    table.PrimaryKey("PK_Experiences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Experiances_JobSeekers_JobSeekerId",
+                        name: "FK_Experiences_JobSeekers_JobSeekerId",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
-                        principalColumn: "JobSeekerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -387,23 +373,23 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "JobSeekerSkill",
                 columns: table => new
                 {
-                    JobSeekersJobSeekerId = table.Column<int>(type: "int", nullable: false),
-                    SkillsSkillId = table.Column<int>(type: "int", nullable: false)
+                    JobSeekersId = table.Column<int>(type: "int", nullable: false),
+                    SkillsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobSeekerSkill", x => new { x.JobSeekersJobSeekerId, x.SkillsSkillId });
+                    table.PrimaryKey("PK_JobSeekerSkill", x => new { x.JobSeekersId, x.SkillsId });
                     table.ForeignKey(
-                        name: "FK_JobSeekerSkill_JobSeekers_JobSeekersJobSeekerId",
-                        column: x => x.JobSeekersJobSeekerId,
+                        name: "FK_JobSeekerSkill_JobSeekers_JobSeekersId",
+                        column: x => x.JobSeekersId,
                         principalTable: "JobSeekers",
-                        principalColumn: "JobSeekerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_JobSeekerSkill_Skills_SkillsSkillId",
-                        column: x => x.SkillsSkillId,
+                        name: "FK_JobSeekerSkill_Skills_SkillsId",
+                        column: x => x.SkillsId,
                         principalTable: "Skills",
-                        principalColumn: "SkillId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -411,18 +397,17 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Qualifications",
                 columns: table => new
                 {
-                    QualificationId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SchoolName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<double>(type: "float", nullable: true),
+                    Duration = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     QualificationStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     QualificationEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Grade = table.Column<double>(type: "float", nullable: true),
-                    QualificationDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JobSeekerId = table.Column<int>(type: "int", nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    QualificationDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobSeekerId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -430,12 +415,13 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Qualifications", x => x.QualificationId);
+                    table.PrimaryKey("PK_Qualifications", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Qualifications_JobSeekers_JobSeekerId",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
-                        principalColumn: "JobSeekerId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -444,7 +430,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 {
                     JobId = table.Column<int>(type: "int", nullable: false),
                     JobSeekerId = table.Column<int>(type: "int", nullable: false),
-                    ApplicantId = table.Column<int>(type: "int", nullable: false),
                     ApplicantStatusId = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -456,53 +441,20 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Applicants", x => new { x.JobSeekerId, x.JobId });
                     table.ForeignKey(
-                        name: "FK_Applicants_ApplicantStatus_ApplicantStatusId",
+                        name: "FK_Applicants_ApplicantStatuses_ApplicantStatusId",
                         column: x => x.ApplicantStatusId,
-                        principalTable: "ApplicantStatus",
-                        principalColumn: "ApplicantStatusId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "ApplicantStatuses",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Applicants_JobSeekers_JobSeekerId",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
-                        principalColumn: "JobSeekerId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Applicants_Jobs_JobId",
                         column: x => x.JobId,
                         principalTable: "Jobs",
-                        principalColumn: "JobId");
-                });
-
-            migrationBuilder.InsertData(
-                table: "ApplicantStatus",
-                columns: new[] { "ApplicantStatusId", "ApplicantStatusName", "DateCreated", "DateDeleted", "DateUpdated", "Id", "IsDeleted" },
-                values: new object[,]
-                {
-                    { 1, "Open", new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3143), null, null, 0, false },
-                    { 2, "Accepted", new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3162), null, null, 0, false },
-                    { 3, "Rejected", new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3171), null, null, 0, false }
-                });
-
-            migrationBuilder.InsertData(
-                table: "JobStatus",
-                columns: new[] { "JobStatusId", "DateCreated", "DateDeleted", "DateUpdated", "Id", "IsDeleted", "JobStatusName" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(2931), null, null, 0, false, "Pending" },
-                    { 2, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3071), null, null, 0, false, "Published" },
-                    { 3, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3081), null, null, 0, false, "Rejected" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserTypes",
-                columns: new[] { "UserTypeId", "DateCreated", "DateDeleted", "DateUpdated", "Id", "IsDeleted", "UserTypeName" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3216), null, null, 0, false, "JobSeeker" },
-                    { 2, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3232), null, null, 0, false, "Company" },
-                    { 3, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3240), null, null, 0, false, "Admin" },
-                    { 4, new DateTime(2023, 10, 26, 21, 26, 43, 538, DateTimeKind.Local).AddTicks(3248), null, null, 0, false, "SuperAdmin" }
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -568,11 +520,12 @@ namespace JobResearchSystem.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_UserId",
                 table: "Companies",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Experiances_JobSeekerId",
-                table: "Experiances",
+                name: "IX_Experiences_JobSeekerId",
+                table: "Experiences",
                 column: "JobSeekerId");
 
             migrationBuilder.CreateIndex(
@@ -593,12 +546,13 @@ namespace JobResearchSystem.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_JobSeekers_UserId",
                 table: "JobSeekers",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobSeekerSkill_SkillsSkillId",
+                name: "IX_JobSeekerSkill_SkillsId",
                 table: "JobSeekerSkill",
-                column: "SkillsSkillId");
+                column: "SkillsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Qualifications_JobSeekerId",
@@ -628,7 +582,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Experiances");
+                name: "Experiences");
 
             migrationBuilder.DropTable(
                 name: "JobSeekerSkill");
@@ -637,7 +591,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Qualifications");
 
             migrationBuilder.DropTable(
-                name: "ApplicantStatus");
+                name: "ApplicantStatuses");
 
             migrationBuilder.DropTable(
                 name: "Jobs");
@@ -658,7 +612,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "JobStatus");
+                name: "JobStatuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

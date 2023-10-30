@@ -3,26 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("Qualifications")]
     public class Qualification : BaseEntity
     {
-        
         public string SchoolName { get; set; }
         public string? Degree { get; set; }
         public string? FieldOfStudy { get; set; }
-        public double? Duration { get; set; }
+        public decimal? Duration { get; set; }
         public DateTime? QualificationStartDate { get; set; }
         public DateTime? QualificationEndDate { get; set; }
 
-        public double? Grade { get; set; }
+        public decimal? Grade { get; set; }
         public string? QualificationDescription { get; set; }
 
         /*----- Relations -----*/
 
-        [ForeignKey(nameof(JobSeeker))]
-        public int? JobSeekerId { get; set; }
+        public int JobSeekerId { get; set; }
 
-        public JobSeeker? JobSeeker { get; set; }
+        public JobSeeker JobSeeker { get; set; }
 
     }
 }

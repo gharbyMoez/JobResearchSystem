@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities
 {
-    [Table("Companies")]
     public class Company : BaseEntity
     {
         public string CompanyName { get; set; }
@@ -17,13 +16,6 @@ namespace JobResearchSystem.Domain.Entities
 
         public ICollection<Job>? Jobs { get; set; }
 
-        ////////////////
-
-        //public ICollection<Experience>? Experience { get; set; }//??
-
-        ////////////////
-
-        [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
