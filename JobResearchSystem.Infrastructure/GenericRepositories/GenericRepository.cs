@@ -39,7 +39,7 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
                 entity.IsDeleted = true;
                 entity.DateDeleted = DateTime.Now;
                 //_appDbContext.Entry(entity).State = EntityState.Deleted;
-                await _appDbContext.SaveChangesAsync();
+                //await _appDbContext.SaveChangesAsync();
                 return true;
             }
             if (entity != null && entity.IsDeleted == true)

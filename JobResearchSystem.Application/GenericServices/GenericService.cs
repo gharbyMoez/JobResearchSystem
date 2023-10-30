@@ -36,17 +36,27 @@ namespace JobResearchSystem.Application.GenericServices
 
         public async Task<TEntity?> CreateAsync(TEntity entity)
         {
-            return await _repository.CreateAsync(entity);
+            await _repository.CreateAsync(entity);
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? entity : null;
         }
 
         public async Task<TEntity?> UpdateAsync(TEntity entity)
         {
-            return await _repository.UpdateAsync(entity);
+            await _repository.UpdateAsync(entity);
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? entity : null;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? true : false;
+
         }
     }
 }
