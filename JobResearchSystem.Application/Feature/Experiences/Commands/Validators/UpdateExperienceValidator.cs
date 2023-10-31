@@ -1,18 +1,18 @@
 ﻿using FluentValidation;
-using JobResearchSystem.Application.Feature.Skills.Commands.Models;
+using JobResearchSystem.Application.Feature.Experiences.Commands.Models;
 
-namespace JobResearchSystem.Application.Feature.Skills.Commands.Validators
+namespace JobResearchSystem.Application.Feature.Experiences.Commands.Validators
 {
-    public class UpdateSkillValidator : AbstractValidator<UpdateSkillCommand>
+    public class UpdateExperienceValidator : AbstractValidator<UpdateExperienceCommand>
     {
-        public UpdateSkillValidator() { ApplyValidationsRules(); }
+        public UpdateExperienceValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.Id)
+            RuleFor(x => x.ExperienceId)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 
-            RuleFor(x => x.SkillName)
+            RuleFor(x => x.ExperienceTitle)
                .NotEmpty().WithMessage("NotEmpty")
                .NotNull().WithMessage("Skill Name Required")
                .MinimumLength(1).WithMessage("Skill Name Minimum Length is 1 characters ")

@@ -1,6 +1,5 @@
 ﻿using JobResearchSystem.Application.Feature.Skills.Commands.Models;
 using JobResearchSystem.Application.Feature.Skills.Queries.Models;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobResearchSystem.API.Controllers
@@ -9,7 +8,7 @@ namespace JobResearchSystem.API.Controllers
     [ApiController]
     public class SkillController : ApiBaseController
     {
-        
+
 
         [HttpGet("GetAllSkills")]
         public async Task<IActionResult> GetAllSkills()
