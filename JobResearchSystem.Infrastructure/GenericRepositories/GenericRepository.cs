@@ -25,9 +25,9 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public virtual async Task<T?> UpdateAsync(T entity)
         {
-            var oldEntity = await _appDbContext.Set<T>().FindAsync(entity.Id);
+            //var oldEntity = await _appDbContext.Set<T>().FindAsync(entity.Id);
 
-            _appDbContext.Set<T>().Attach(entity);
+            //_appDbContext.Set<T>().Attach(entity);
 
 
             _appDbContext.Entry(entity).State = EntityState.Modified;
