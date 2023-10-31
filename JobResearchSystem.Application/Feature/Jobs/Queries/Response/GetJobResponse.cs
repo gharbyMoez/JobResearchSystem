@@ -2,6 +2,6 @@
 {
     public class GetJobResponse
     {
-        public string JobTitle { get; set; }
+        public string Title { get; set; }
     }
 }
