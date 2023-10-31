@@ -19,6 +19,6 @@ namespace JobResearchSystem.Application.Feature.Companies.Commands.Models
         public string? Website { get; set; }
 
         //public string UserId { get; set; }
-        
+
     }
 }
