@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using JobResearchSystem.Application.Feature.Categories.Commands.Models;
 
-namespace JobResearchSystem.Application.Feature.Experiences.Commands.Validators
+namespace JobResearchSystem.Application.Feature.Categories.Commands.Validators
 {
     public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryCommand>
     {

@@ -10,29 +10,6 @@ namespace JobResearchSystem.Application.IService
         {
         }
 
-        public Task<Qualification?> CreateAsync(Qualification entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Qualification>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Qualification?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Qualification?> UpdateAsync(Qualification entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

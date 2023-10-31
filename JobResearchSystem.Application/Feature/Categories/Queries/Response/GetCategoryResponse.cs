@@ -2,6 +2,6 @@
 {
     public class GetCategoryResponse
     {
-        public string CategoryTitle { get; set; }
+        public string CategoryName { get; set; }
     }
 }
