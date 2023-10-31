@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JobResearchSystem.Domain.Entities
+﻿namespace JobResearchSystem.Domain.Entities
 {
     public class Applicant : BaseEntity
     {
@@ -20,7 +17,7 @@ namespace JobResearchSystem.Domain.Entities
 
         //////////
 
-        public int ApplicantStatusId { get; set; }
+        public int ApplicantStatusId { get; set; } = 1;
 
         public ApplicantStatus ApplicantStatus { get; set; }
     }

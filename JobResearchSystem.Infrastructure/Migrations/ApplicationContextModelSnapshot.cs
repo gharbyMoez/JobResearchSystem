@@ -558,7 +558,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.HasIndex("SkillsId");
 
-                    b.ToTable("JobSeekerSkill");
+                    b.ToTable("JobSeekerSkill", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

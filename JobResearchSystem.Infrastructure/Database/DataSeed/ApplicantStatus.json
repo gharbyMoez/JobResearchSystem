@@ -3,6 +3,9 @@
     "ApplicantStatusName": "Waiting"
   },
   {
+    "ApplicantStatusName": "Open"
+  },
+  {
     "ApplicantStatusName": "Accepted"
   },
   {
