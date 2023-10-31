@@ -1,0 +1,11 @@
+[
+  {
+    "ApplicantStatusName": "Open"
+  },
+  {
+    "ApplicantStatusName": "Accepted"
+  },
+  {
+    "ApplicantStatusName": "Rejected"
+  }
+]

@@ -1,0 +1,62 @@
+﻿using JobResearchSystem.Domain.Entities;
+using JobResearchSystem.Infrastructure.GenericRepositories;
+using JobResearchSystem.Infrastructure.UnitOfWorks;
+
+namespace JobResearchSystem.Application.GenericServices
+{
+    public class GenericService<TEntity> : IGenericService<TEntity>
+        where TEntity : BaseEntity
+    {
+        protected readonly IUnitOfWork _unitOfWork;
+        private readonly IGenericRepository<TEntity> _repository;
+
+        public GenericService(IUnitOfWork unitOfWork)
+        {
+            this._unitOfWork = unitOfWork;
+            this._repository = unitOfWork.GetRepository<TEntity>();
+        }
+
+
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            var t = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
+            return t; /*await _repository.GetAllAsync();*/
+
+        }
+
+        public virtual async Task<TEntity?> GetByIdAsync(int id)
+        {
+            var t = await _unitOfWork.GetRepository<TEntity>().GetByIdAsync(id);
+            return t; /*await _repository.GetByIdAsync(id);*/
+        }
+
+        public async Task<TEntity?> CreateAsync(TEntity entity)
+        {
+            await _unitOfWork.GetRepository<TEntity>().CreateAsync(entity);
+
+            /*await _repository.CreateAsync(entity);*/
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? entity : null;
+        }
+
+        public async Task<TEntity?> UpdateAsync(TEntity entity)
+        {
+            await _unitOfWork.GetRepository<TEntity>().UpdateAsync(entity);
+            // await _repository.UpdateAsync(entity);
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? entity : null;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            await _unitOfWork.GetRepository<TEntity>().DeleteAsync(id);
+            // await _repository.DeleteAsync(id);
+            var count = await _unitOfWork.Complete();
+
+            return count > 0 ? true : false;
+
+        }
+    }
+}
