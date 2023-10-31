@@ -3,7 +3,7 @@ using JobResearchSystem.Domain.Entities;
 
 namespace JobResearchSystem.Application.IService
 {
-    public interface ISkillService : IGenericService<Skill>
+    public interface IUserTypeService : IGenericService<UserType>
     {
 
     }
