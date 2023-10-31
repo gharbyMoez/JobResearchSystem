@@ -8,11 +8,11 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Validato
         public UpdateQualificationValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.ExperienceId)
+            RuleFor(x => x.QualificationId)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 
-            RuleFor(x => x.ExperienceTitle)
+            RuleFor(x => x.SchoolName)
                .NotEmpty().WithMessage("NotEmpty")
                .NotNull().WithMessage("Skill Name Required")
                .MinimumLength(1).WithMessage("Skill Name Minimum Length is 1 characters ")

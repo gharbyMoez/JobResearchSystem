@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using JobResearchSystem.Application.Bases;
-using JobResearchSystem.Application.Feature.Experiences.Commands.Models;
-using JobResearchSystem.Application.Feature.Experiences.Queries.Response;
 using JobResearchSystem.Application.Feature.Qualifications.Commands.Models;
 using JobResearchSystem.Application.Feature.Qualifications.Queries.Response;
 using JobResearchSystem.Application.IService;
@@ -13,15 +11,15 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Handlers
     public class QualificationCommandHandler : ResponseHandler,
                                        IRequestHandler<AddQualificationCommand, Response<string>>,
                                        IRequestHandler<DeleteQualificationCommand, Response<string>>,
-                                       IRequestHandler<UpdateQualificationCommand, Response<GetExperienceResponse>>
+                                       IRequestHandler<UpdateQualificationCommand, Response<GetQualificationResponse>>
     {
         #region CTOR
-        private IQualificationService _experienceService;
+        private IQualificationService _qualificationService;
         private IMapper _mapper;
 
-        public QualificationCommandHandler(IQualificationService ExperienceSerice, IMapper mapper)
+        public QualificationCommandHandler(IQualificationService qualificationService, IMapper mapper)
         {
-            _experienceService = ExperienceSerice;
+            _qualificationService = qualificationService;
             _mapper = mapper;
         }
         #endregion
@@ -29,7 +27,7 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Handlers
         public async Task<Response<string>> Handle(AddQualificationCommand request, CancellationToken cancellationToken)
         {
             var experiene = _mapper.Map<Qualification>(request);
-            var result = await _experienceService.CreateAsync(experiene);
+            var result = await _qualificationService.CreateAsync(experiene);
 
             if (result is null)
                 return BadRequest<string>("Something Went Wrong");
@@ -41,7 +39,7 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Handlers
         {
             var experiene = _mapper.Map<Qualification>(request);
 
-            var result = await _experienceService.UpdateAsync(experiene);
+            var result = await _qualificationService.UpdateAsync(experiene);
 
             var resultDto = _mapper.Map<GetQualificationResponse>(request);
 
@@ -52,9 +50,9 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Handlers
 
 
 
-        public async Task<Response<string>> Handle(DeleteExperienceCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(DeleteQualificationCommand request, CancellationToken cancellationToken)
         {
-            var result = await _experienceService.DeleteAsync(request.ExperienceId);
+            var result = await _qualificationService.DeleteAsync(request.QualificationId);
 
             if (!result)
                 return BadRequest<string>("");

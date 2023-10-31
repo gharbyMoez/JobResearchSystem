@@ -6,6 +6,6 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Queries.Models
 {
     public class GetQualificationByIdQuery : IRequest<Response<GetQualificationResponse>>
     {
-        public int ExperienceId { get; set; }
+        public int QualificationId { get; set; }
     }
 }

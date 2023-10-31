@@ -2,6 +2,6 @@
 {
     public class GetQualificationResponse
     {
-        public string ExperienceTitle { get; set; }
+        public string SchoolName { get; set; }
     }
 }

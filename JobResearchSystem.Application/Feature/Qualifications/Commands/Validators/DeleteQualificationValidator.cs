@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
+using JobResearchSystem.Application.Feature.Qualifications.Commands.Models;
 
-namespace JobResearchSystem.Application.Feature.Experiences.Commands.Validators
+namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Validators
 {
     public class DeleteQualificationValidator : AbstractValidator<DeleteQualificationCommand>
     {
@@ -8,7 +9,7 @@ namespace JobResearchSystem.Application.Feature.Experiences.Commands.Validators
         public void ApplyValidationsRules()
         {
 
-            RuleFor(x => x.ExperienceId)
+            RuleFor(x => x.QualificationId)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
         }
