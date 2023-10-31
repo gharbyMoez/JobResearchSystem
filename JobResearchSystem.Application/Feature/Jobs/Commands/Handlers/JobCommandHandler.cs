@@ -52,7 +52,7 @@ namespace JobResearchSystem.Application.Feature.Jobs.Commands.Handlers
 
         public async Task<Response<string>> Handle(DeleteJobCommand request, CancellationToken cancellationToken)
         {
-            var result = await _JobService.DeleteAsync(request.ExperienceId);
+            var result = await _JobService.DeleteAsync(request.JobId);
 
             if (!result)
                 return BadRequest<string>("");

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobResearchSystem.Application.Bases;
+using JobResearchSystem.Application.Feature.Experiences.Queries.Models;
 using JobResearchSystem.Application.Feature.Qualifications.Queries.Models;
 using JobResearchSystem.Application.Feature.Qualifications.Queries.Response;
 using JobResearchSystem.Application.IService;
@@ -41,7 +42,7 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Queries.Handlers
 
         public async Task<Response<GetQualificationResponse>> Handle(GetQualificationByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _experienceService.GetByIdAsync(request.ExperienceId);
+            var entity = await _experienceService.GetByIdAsync(request.QualificationId);
 
             if (entity == null)
             {
