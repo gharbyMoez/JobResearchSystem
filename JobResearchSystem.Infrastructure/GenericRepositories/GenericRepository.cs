@@ -29,10 +29,11 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
             _appDbContext.Set<T>().Attach(entity);
 
-            //_appDbContext.Set<T>().Update(entity);
+
             _appDbContext.Entry(entity).State = EntityState.Modified;
-            //await _appDbContext.SaveChangesAsync();
+
             return entity;
+
         }
 
         public virtual async Task<bool> DeleteAsync(int id)

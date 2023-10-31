@@ -19,4 +19,10 @@
     <ProjectReference Include="..\JobResearchSystem.Infrastructure\JobResearchSystem.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Feature\JobStatus\Commands\Handlers\" />
+    <Folder Include="Feature\JobStatus\Commands\Models\" />
+    <Folder Include="Feature\JobStatus\Commands\Validators\" />
+  </ItemGroup>
+
 </Project>
