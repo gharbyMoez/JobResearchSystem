@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JobResearchSystem.Domain.Entities
+﻿namespace JobResearchSystem.Domain.Entities
 {
     public class Skill : BaseEntity
     {
