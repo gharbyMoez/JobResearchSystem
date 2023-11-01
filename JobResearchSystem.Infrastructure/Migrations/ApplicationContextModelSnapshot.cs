@@ -24,11 +24,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Applicant", b =>
                 {
-                    b.Property<int>("JobSeekerId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApplicantStatusId")
                         .HasColumnType("int");
@@ -42,13 +42,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("JobSeekerId", "JobId");
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ApplicantStatusId");
 

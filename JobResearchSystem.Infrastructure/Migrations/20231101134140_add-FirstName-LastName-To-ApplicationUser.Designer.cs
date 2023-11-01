@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
+<<<<<<<< HEAD:JobResearchSystem.Infrastructure/Migrations/20231101134140_add-FirstName-LastName-To-ApplicationUser.Designer.cs
     [Migration("20231101134140_add-FirstName-LastName-To-ApplicationUser")]
     partial class addFirstNameLastNameToApplicationUser
+========
+    [Migration("20231101141653_Init_DB")]
+    partial class Init_DB
+>>>>>>>> 3820c7b63cb89c695639338edf3d1f82557e04c8:JobResearchSystem.Infrastructure/Migrations/20231101141653_Init_DB.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +32,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Applicant", b =>
                 {
-                    b.Property<int>("JobSeekerId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApplicantStatusId")
                         .HasColumnType("int");
@@ -45,13 +50,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("JobSeekerId", "JobId");
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ApplicantStatusId");
 
