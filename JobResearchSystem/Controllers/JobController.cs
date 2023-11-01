@@ -1,5 +1,6 @@
 ﻿using JobResearchSystem.Application.Feature.Jobs.Commands.Models;
 using JobResearchSystem.Application.Feature.Jobs.Queries.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobResearchSystem.API.Controllers
@@ -25,6 +26,7 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [Authorize(Roles = "COMPANY")]
         [HttpPost("AddJob")]
         public async Task<IActionResult> AddJob(AddJobCommand command)
         {
@@ -32,6 +34,7 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [Authorize(Roles = "COMPANY")]
         [HttpPut("UpdateJob")]
         public async Task<IActionResult> UpdateJob(UpdateJobCommand command)
         {
@@ -39,6 +42,7 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [Authorize(Roles = "COMPANY")]
         [HttpDelete("RemoveJob")]
         public async Task<IActionResult> RemoveJob(DeleteJobCommand command)
         {

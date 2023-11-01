@@ -21,6 +21,7 @@ namespace JobResearchSystem.Application.Feature.Jobs.Queries.Response
 
         public string CompanyName { get; set; }
         public string CategoryName { get; set; }
+        public int NumberOfApplicants { get; set; }
 
         public int? JobStatusId { get; set; } = 1;
     }

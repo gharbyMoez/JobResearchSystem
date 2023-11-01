@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-<<<<<<<< HEAD:JobResearchSystem.Infrastructure/Migrations/20231101134140_add-FirstName-LastName-To-ApplicationUser.Designer.cs
-    [Migration("20231101134140_add-FirstName-LastName-To-ApplicationUser")]
-    partial class addFirstNameLastNameToApplicationUser
-========
-    [Migration("20231101141653_Init_DB")]
-    partial class Init_DB
->>>>>>>> 3820c7b63cb89c695639338edf3d1f82557e04c8:JobResearchSystem.Infrastructure/Migrations/20231101141653_Init_DB.Designer.cs
+    [Migration("20231101144909_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

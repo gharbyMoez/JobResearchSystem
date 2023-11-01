@@ -116,7 +116,15 @@ namespace JobResearchSystem.Application.Services
                 return new AuthResponseModel { Message = errors.ToString() };
             }
 
-            await _userManager.AddToRoleAsync(user, "JOBSEEKER");
+            if (model.UserTypeId == 1)
+            {
+                await _userManager.AddToRoleAsync(user, "JOBSEEKER");
+            }
+            else if (model.UserTypeId == 2)
+            {
+                await _userManager.AddToRoleAsync(user, "COMPANY");
+            }
+
 
             var jwtSecurityToken = await CreateJwtToken(user);
 
@@ -125,7 +133,11 @@ namespace JobResearchSystem.Application.Services
                 Email = user.Email,
                 ExpiresOn = jwtSecurityToken.ValidTo,
                 IsAuthenticated = true,
-                Roles = new List<string> { "JOBSEEKER" },
+                Roles = model.UserTypeId == 1 ?
+                            new List<string> { "JOBSEEKER" } :
+                            model.UserTypeId == 2 ?
+                            new List<string> { "COMPANY" } :
+                            new List<string>(),
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Username = user.UserName
             };
@@ -176,7 +188,7 @@ namespace JobResearchSystem.Application.Services
             var users = await _db.Users.ToListAsync();
 
             var usersResponseDto = _mapper.Map<IEnumerable<ResponseUserDetailsDto>>(users);
-            
+
             return usersResponseDto;
         }
 
@@ -189,11 +201,17 @@ namespace JobResearchSystem.Application.Services
             return userResponseDto;
         }
 
-        public async Task<ApplicationUser> UpdateUserAsync(ApplicationUser Dto)
+        public async Task<ResponseUserDetailsDto> UpdateUserAsync(UpdateUserDetailsDto Dto)
         {
-            _db.Entry(Dto).State = EntityState.Modified;
+            var user = _mapper.Map<ApplicationUser>(Dto);
+
+            _db.Entry(user).State = EntityState.Modified;
+
             await _db.SaveChangesAsync();
-            return Dto;
+
+            var responseUserDto = _mapper.Map<ResponseUserDetailsDto>(user);
+
+            return responseUserDto;
         }
 
         public Task<bool> ChangePassword(string userId, string password)

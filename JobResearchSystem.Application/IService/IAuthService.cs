@@ -14,7 +14,7 @@ namespace JobResearchSystem.Application.IService
         Task<ResponseUserDetailsDto> GetUserByIdAsync(string id);
 
 
-        Task<ApplicationUser> UpdateUserAsync(ApplicationUser Dto);
+        Task<ResponseUserDetailsDto> UpdateUserAsync(UpdateUserDetailsDto Dto);
         Task DeleteUserAsync(string id);
 
         Task<bool> ChangePassword(string userId, string password);

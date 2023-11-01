@@ -97,7 +97,7 @@ namespace JobResearchSystem.API.Controllers
 
         [HttpPut]
         [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromBody] ApplicationUser model)
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDetailsDto model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

@@ -11,7 +11,8 @@ namespace JobResearchSystem.Application.Mapping.Experiences
         {
             CreateMap<Job, GetJobResponse>()
                              .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName))
-                             .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName));
+                             .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName))
+                             .ForMember(dest => dest.NumberOfApplicants, opt => opt.MapFrom(src => src.Applicants.Count()));
 
             CreateMap<UpdateJobCommand, GetJobResponse>();
 

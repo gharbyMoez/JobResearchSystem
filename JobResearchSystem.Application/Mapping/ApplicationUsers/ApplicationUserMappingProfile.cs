@@ -12,7 +12,8 @@ namespace JobResearchSystem.Application.Mapping.ApplicationUsers
         public ApplicationUserMappingProfile()
         {
             
-            CreateMap<ApplicationUser, ResponseUserDetailsDto>();
+            CreateMap<ApplicationUser, ResponseUserDetailsDto>().ReverseMap();
+            CreateMap<ApplicationUser, UpdateUserDetailsDto>().ReverseMap();
 
         }
     }
