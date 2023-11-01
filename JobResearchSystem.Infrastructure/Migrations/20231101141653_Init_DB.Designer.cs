@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231030173457_initial")]
-    partial class initial
+    [Migration("20231101141653_Init_DB")]
+    partial class Init_DB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Applicant", b =>
                 {
-                    b.Property<int>("JobSeekerId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApplicantStatusId")
                         .HasColumnType("int");
@@ -45,13 +45,16 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("JobSeekerId", "JobId");
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobSeekerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ApplicantStatusId");
 
@@ -727,7 +730,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Company", b =>
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", "User")
-                        .WithOne("Company")
+                        .WithOne()
                         .HasForeignKey("JobResearchSystem.Domain.Entities.Company", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -786,7 +789,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.JobSeeker", b =>
                 {
                     b.HasOne("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", "User")
-                        .WithOne("JobSeeker")
+                        .WithOne()
                         .HasForeignKey("JobResearchSystem.Domain.Entities.JobSeeker", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -884,13 +887,6 @@ namespace JobResearchSystem.Infrastructure.Migrations
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Company", b =>
                 {
                     b.Navigation("Jobs");
-                });
-
-            modelBuilder.Entity("JobResearchSystem.Domain.Entities.Extend.ApplicationUser", b =>
-                {
-                    b.Navigation("Company");
-
-                    b.Navigation("JobSeeker");
                 });
 
             modelBuilder.Entity("JobResearchSystem.Domain.Entities.Job", b =>

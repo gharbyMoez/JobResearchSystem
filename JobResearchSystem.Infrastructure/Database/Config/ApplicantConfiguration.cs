@@ -10,7 +10,7 @@ namespace JobResearchSystem.Infrastructure.Database.Config
         {
             builder.ToTable("Applicants");
 
-            builder.HasKey(x => new { x.JobSeekerId, x.JobId });
+            //builder.HasKey(x => new { x.JobSeekerId, x.JobId });
 
             builder.HasIndex(x => new { x.JobSeekerId, x.JobId })
                .IsUnique();
