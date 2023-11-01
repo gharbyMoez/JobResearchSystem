@@ -1,6 +1,7 @@
 ﻿using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Infrastructure.GenericRepositories;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
+using System.Linq.Expressions;
 
 namespace JobResearchSystem.Application.GenericServices
 {
@@ -17,16 +18,16 @@ namespace JobResearchSystem.Application.GenericServices
         }
 
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, object>>[] includes = null)
         {
-            var t = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
+            var t = await _unitOfWork.GetRepository<TEntity>().GetAllAsync(includes);
             return t; /*await _repository.GetAllAsync();*/
 
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(int id)
+        public virtual async Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>>[] includes = null)
         {
-            var t = await _unitOfWork.GetRepository<TEntity>().GetByIdAsync(id);
+            var t = await _unitOfWork.GetRepository<TEntity>().GetByIdAsync(id, includes);
             return t; /*await _repository.GetByIdAsync(id);*/
         }
 

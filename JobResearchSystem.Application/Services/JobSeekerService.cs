@@ -9,5 +9,7 @@ namespace JobResearchSystem.Application.IService
         public JobSeekerService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
+      
     }
 }

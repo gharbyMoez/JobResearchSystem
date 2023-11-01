@@ -9,12 +9,20 @@ namespace JobResearchSystem.Application.Mapping.Experiences
     {
         public JobsMappingProfile()
         {
-            CreateMap<Job, GetJobResponse>();
+            CreateMap<Job, GetJobResponse>()
+                             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.CategoryName))
+                             .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName));
+
             CreateMap<UpdateJobCommand, GetJobResponse>();
 
             CreateMap<AddJobCommand, Job>();
 
             CreateMap<UpdateJobCommand, Job>();
+
+            CreateMap<Applicant, GetApplicantsByJobIdResponse>()
+                .ForMember(x => x.ApplicantStatus, opt => opt.MapFrom(src => src.ApplicantStatus.ApplicantStatusName))
+                .ForMember(x => x.CVFilePath, opt => opt.MapFrom(src => src.JobSeeker.CVFilePath))
+                .ForMember(x => x.ImageFilePath, opt => opt.MapFrom(src => src.JobSeeker.ImageFilePath));
 
         }
     }

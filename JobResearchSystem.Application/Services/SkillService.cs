@@ -2,6 +2,7 @@
 using JobResearchSystem.Application.IService;
 using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
+using System.Linq.Expressions;
 
 namespace JobResearchSystem.Application.Services
 {
@@ -11,9 +12,9 @@ namespace JobResearchSystem.Application.Services
         {
         }
 
-        public override Task<Skill?> GetByIdAsync(int id)
+        public override Task<Skill?> GetByIdAsync(int id, Expression<Func<Skill, object>>[] includes = null)
         {
-            return _unitOfWork.Skills.GetByIdAsync(id);
+            return base.GetByIdAsync(id, includes);
         }
 
     }

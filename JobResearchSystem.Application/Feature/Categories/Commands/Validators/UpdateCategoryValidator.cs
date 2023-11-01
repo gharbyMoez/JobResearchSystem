@@ -8,7 +8,7 @@ namespace JobResearchSystem.Application.Feature.Categories.Commands.Validators
         public UpdateCategoryValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.CategoryId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 

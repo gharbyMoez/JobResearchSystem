@@ -45,6 +45,18 @@ namespace JobResearchSystem.API.Controllers
             var result = await Mediator.Send(command);
             return NewResult(result);
         }
+        
+        
+        [HttpGet("{jobId}/applicant")]
+        public async Task<IActionResult> GetAllApplicantByJobId(int jobId)
+        {
+            var result = await Mediator.Send(new GetAllApplicantByJobIdQuery() { JobId = jobId});
+
+            return NewResult(result);
+        }
+
+
+
 
     }
 }

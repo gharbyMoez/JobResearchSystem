@@ -18,6 +18,6 @@ namespace JobResearchSystem.Application.Feature.Experiences.Commands.Models
 
         /*----- Relations -----*/
 
-        public int JobSeekerId { get; set; }
+        //public int JobSeekerId { get; set; }
     }
 }

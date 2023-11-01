@@ -17,31 +17,24 @@ namespace JobResearchSystem.Application.IService
 
             if (oldEntity == null) return null;
 
-            entity.UserId = oldEntity.UserId;
 
-            //var newEntity = new Company() 
-            //{
-            //    Id = entity.Id,
-            //    UserId = oldentity.UserId,
-            //    CompanyName = entity.CompanyName,
-            //    NumberOfJobs = entity.NumberOfJobs,
-            //    Phone = entity.Phone,
-            //    Address = entity.Address,
-            //    Website = entity.Website,
-            //    DateUpdated = DateTime.Now,
-            //    DateCreated = entity.DateCreated,
-            //    IsDeleted = entity.IsDeleted,
-            //    DateDeleted = entity.DateDeleted,
-            //};
+            var newEntity = new Company()
+            {
+                Id = entity.Id,
+                UserId = oldEntity.UserId,
+                CompanyName = entity.CompanyName,
+                NumberOfJobs = entity.NumberOfJobs,
+                Phone = entity.Phone,
+                Address = entity.Address,
+                Website = entity.Website,
+                DateUpdated = DateTime.Now,
+                DateCreated = entity.DateCreated,
+                IsDeleted = entity.IsDeleted,
+                DateDeleted = entity.DateDeleted,
+            };
 
 
-            //return await base.UpdateAsync(entity);
-
-            //await _unitOfWork.GetRepository<TEntity>().UpdateAsync(entity);
-            await _repository.UpdateAsync(entity);
-            var count = await _unitOfWork.Complete();
-
-            return count > 0 ? entity : null;
+            return await base.UpdateAsync(newEntity);
         }
     }
 }

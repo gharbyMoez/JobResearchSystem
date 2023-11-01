@@ -5,5 +5,6 @@ namespace JobResearchSystem.Infrastructure.Repositories.ApplicantRepositories
 {
     public interface IApplicantRepository : IGenericRepository<Applicant>
     {
+        Task<IEnumerable<Applicant>> GetApplicantsByJobIdAsync(int jobId);
     }
 }

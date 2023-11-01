@@ -18,5 +18,17 @@ namespace JobResearchSystem.Infrastructure.Repositories.ApplicantRepositories
         {
         }
         #endregion
+
+        public async Task<IEnumerable <Applicant>> GetApplicantsByJobIdAsync(int jobId)
+        {
+            var applicants = _appDbContext.Set<Applicant>()
+                .AsNoTracking()
+                .Where(x => x.IsDeleted == false)
+                .Where( x => x.JobId == jobId)
+                .Include(x => x.JobSeeker)
+                .Include(x => x.ApplicantStatus);
+
+            return applicants;
+        }
     }
 }

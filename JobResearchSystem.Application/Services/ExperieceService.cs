@@ -9,5 +9,31 @@ namespace JobResearchSystem.Application.IService
         public ExperienceService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
+        public override async Task<Experience?> UpdateAsync(Experience entity)
+        {
+            var oldEntity = await _repository.GetByIdAsync(entity.Id);
+
+            if (oldEntity == null) return null;
+
+
+            var newEntity = new Experience()
+            {
+                Id = entity.Id,
+                ExperienceCompanyName = entity.ExperienceCompanyName,
+                ExperienceTitle = entity.ExperienceTitle,
+                PositionDescription = entity.PositionDescription,
+                ExperienceStartDate = entity.ExperienceStartDate,
+                ExperienceEndDate = entity.ExperienceEndDate,
+                JobSeekerId = oldEntity.JobSeekerId,
+                DateUpdated = DateTime.Now,
+                DateCreated = entity.DateCreated,
+                IsDeleted = entity.IsDeleted,
+                DateDeleted = entity.DateDeleted,
+            };
+
+            return await base.UpdateAsync(entity);
+        }
     }
+
 }

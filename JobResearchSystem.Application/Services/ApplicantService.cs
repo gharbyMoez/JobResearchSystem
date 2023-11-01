@@ -9,5 +9,10 @@ namespace JobResearchSystem.Application.IService
         public ApplicantService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+
+        public async Task<IEnumerable<Applicant>> GetApplicantsByJobIdAsync(int jobId)
+        {
+            return await _unitOfWork.Applicants.GetApplicantsByJobIdAsync(jobId);
+        }
     }
 }

@@ -5,6 +5,5 @@ namespace JobResearchSystem.Application.IService
 {
     public interface IJobSeekerService : IGenericService<JobSeeker>
     {
-
     }
 }
