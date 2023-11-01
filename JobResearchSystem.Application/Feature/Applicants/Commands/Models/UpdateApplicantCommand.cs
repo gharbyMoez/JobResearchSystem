@@ -6,7 +6,7 @@ namespace JobResearchSystem.Application.Feature.Applicants.Commands.Models
 {
     public class UpdateApplicantCommand : IRequest<Response<GetApplicantResponse>>
     {
-        public int ApplicantId { get; set; }
+        public int Id { get; set; }
         public int ApplicantStatusId { get; set; }
     }
 }

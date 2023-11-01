@@ -8,7 +8,7 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Commands.Validato
         public UpdateQualificationValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.QualificationId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 

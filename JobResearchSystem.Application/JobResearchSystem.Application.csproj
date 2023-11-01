@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Feature\ApplicantStatus\Commands\Handlers\" />
+    <Folder Include="Feature\ApplicantStatus\Commands\Models\" />
+    <Folder Include="Feature\ApplicantStatus\Commands\Validators\" />
     <Folder Include="Feature\JobStatus\Commands\Handlers\" />
     <Folder Include="Feature\JobStatus\Commands\Models\" />
     <Folder Include="Feature\JobStatus\Commands\Validators\" />

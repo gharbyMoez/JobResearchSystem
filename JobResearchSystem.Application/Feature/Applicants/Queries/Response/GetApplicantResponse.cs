@@ -2,6 +2,10 @@
 {
     public class GetApplicantResponse
     {
-        public string SkillName { get; set; }
+        public int JobId { get; set; }
+
+        public int JobSeekerId { get; set; }
+
+        public int ApplicantStatusId { get; set; }
     }
 }

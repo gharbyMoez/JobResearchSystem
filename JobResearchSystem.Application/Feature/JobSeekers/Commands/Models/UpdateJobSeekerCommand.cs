@@ -6,7 +6,7 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Commands.Models
 {
     public class UpdateJobSeekerCommand : IRequest<Response<GetJobSeekerResponse>>
     {
-        public int JobSeekerId { get; set; }
+        public int Id { get; set; }
         public string? CVFilePath { get; set; }
         public string? ImageFilePath { get; set; }
 
