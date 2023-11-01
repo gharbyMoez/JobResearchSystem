@@ -8,7 +8,7 @@ namespace JobResearchSystem.Application.Feature.UserTypes.Commands.Validators
         public UpdateUserTypeValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.UserTypeId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 

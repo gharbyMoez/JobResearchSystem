@@ -6,9 +6,10 @@ namespace JobResearchSystem.Application.IService
 {
     public class CompanyService : GenericService<Company>, ICompanyService
     {
+
         public CompanyService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            
+
         }
 
         public override async Task<Company?> UpdateAsync(Company entity)

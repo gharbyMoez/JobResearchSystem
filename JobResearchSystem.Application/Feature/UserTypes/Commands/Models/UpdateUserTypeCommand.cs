@@ -6,7 +6,7 @@ namespace JobResearchSystem.Application.Feature.UserTypes.Commands.Models
 {
     public class UpdateUserTypeCommand : IRequest<Response<GetUserTypeResponse>>
     {
-        public int UserTypeId { get; set; }
+        public int Id { get; set; }
         public string UserTypeName { get; set; }
 
 

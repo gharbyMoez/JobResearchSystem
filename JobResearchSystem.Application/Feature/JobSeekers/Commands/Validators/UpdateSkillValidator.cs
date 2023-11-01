@@ -8,7 +8,7 @@ namespace JobResearchSystem.Application.Feature.Skills.Commands.Validators
         public UpdateJobSeekerValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.JobSeekerId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 

@@ -12,7 +12,7 @@ namespace JobResearchSystem.Application.Feature.Applicants.Commands.Validators
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 
-            RuleFor(x => x.ApplicantId)
+            RuleFor(x => x.Id)
                .NotEmpty().WithMessage("NotEmpty")
                .NotNull().WithMessage("Applicant Id Required");
         }

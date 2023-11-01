@@ -8,7 +8,7 @@ namespace JobResearchSystem.Application.Feature.Experiences.Commands.Validators
         public UpdateExperienceValidator() { ApplyValidationsRules(); }
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.ExperienceId)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
 
