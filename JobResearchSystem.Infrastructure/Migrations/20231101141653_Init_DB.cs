@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Init_DB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -428,10 +428,11 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 name: "Applicants",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     JobId = table.Column<int>(type: "int", nullable: false),
                     JobSeekerId = table.Column<int>(type: "int", nullable: false),
                     ApplicantStatusId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -439,7 +440,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Applicants", x => new { x.JobSeekerId, x.JobId });
+                    table.PrimaryKey("PK_Applicants", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Applicants_ApplicantStatuses_ApplicantStatusId",
                         column: x => x.ApplicantStatusId,
