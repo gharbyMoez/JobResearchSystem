@@ -246,6 +246,12 @@ namespace JobResearchSystem.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -558,7 +564,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
 
                     b.HasIndex("SkillsId");
 
-                    b.ToTable("JobSeekerSkill", (string)null);
+                    b.ToTable("JobSeekerSkill");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
