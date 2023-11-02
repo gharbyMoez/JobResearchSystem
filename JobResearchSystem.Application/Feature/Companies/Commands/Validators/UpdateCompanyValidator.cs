@@ -1,17 +1,29 @@
 ﻿using FluentValidation;
 using JobResearchSystem.Application.Feature.Companies.Commands.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace JobResearchSystem.Application.Feature.Companies.Commands.Validators
 {
     public class UpdateCompanyValidator : AbstractValidator<UpdateCompanyCommand>
     {
-        public UpdateCompanyValidator()
+        private readonly IHttpContextAccessor _httpContext;
+
+        public UpdateCompanyValidator(IHttpContextAccessor httpContext)
         {
+            this._httpContext = httpContext;
+           
+
             ApplyValidationsRules();
+
         }
 
         public void ApplyValidationsRules()
         {
+            var userIdXX = _httpContext.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+
+            RuleFor(x => x.UserId)
+                .Equal(userIdXX).WithMessage("You trying to a access protected resources !");
+
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")
                 .NotNull().WithMessage("Required");
