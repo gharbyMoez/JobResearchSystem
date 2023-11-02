@@ -26,8 +26,37 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Commands.Handlers
 
         public async Task<Response<string>> Handle(AddJobSeekerCommand request, CancellationToken cancellationToken)
         {
-            var movie = _mapper.Map<JobSeeker>(request);
-            var result = await _jobSeekerService.CreateAsync(movie);
+            var jobSeeker = _mapper.Map<JobSeeker>(request);
+
+            //upload image calling  
+            if (request.ImageForm != null)
+            {
+
+                var myTuple = await Helper.HandelFiles.UploadFile(request.ImageForm);  // Add the New Image
+
+                if (myTuple.Item1)
+                {
+                    jobSeeker.ImageFilePath = myTuple.Item2;
+                }
+                else
+                    return BadRequest<string>(myTuple.Item2);
+            }
+
+            //upload Cv calling  
+            if (request.CvForm != null)
+            {
+
+                var myTuple = await Helper.HandelFiles.UploadFile(request.CvForm);  // Add the New Cv
+
+                if (myTuple.Item1)
+                {
+                    jobSeeker.CVFilePath = myTuple.Item2;
+                }
+                else
+                    return BadRequest<string>(myTuple.Item2);
+            }
+
+            var result = await _jobSeekerService.CreateAsync(jobSeeker);
 
             if (result is null)
                 return BadRequest<string>("Something Went Wrong");
@@ -37,7 +66,54 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Commands.Handlers
 
         public async Task<Response<GetJobSeekerResponse>> Handle(UpdateJobSeekerCommand request, CancellationToken cancellationToken)
         {
+
+            if (request.Id <= 0)
+            {
+                return NotFound<GetJobSeekerResponse>("ID must be a positive integer.");
+            }
+
+            var existingJobSeeker = await _jobSeekerService.GetByIdAsync(request.Id);
+
+            if (existingJobSeeker == null)
+            {
+                return NotFound<GetJobSeekerResponse>("This Id Doesn't Exist in DB");
+            }
+
             var jobSeeker = _mapper.Map<JobSeeker>(request);
+
+            if (request.ImageForm != null)//Update Image
+            {
+                if (existingJobSeeker.ImageFilePath != null)
+                {
+                    await Helper.HandelFiles.RemoveFile(existingJobSeeker.ImageFilePath, "image"); // remove old Image
+                }
+
+                var myTuple = await Helper.HandelFiles.UploadFile(request.ImageForm); // Add the New Image
+
+                if (myTuple.Item1)
+                {
+                    jobSeeker.ImageFilePath = myTuple.Item2;
+                }
+                else
+                    return BadRequest<GetJobSeekerResponse>(myTuple.Item2);
+            }
+
+            if (request.CvForm != null)//Update Cv
+            {
+                if (existingJobSeeker.CVFilePath != null)
+                {
+                    await Helper.HandelFiles.RemoveFile(existingJobSeeker.CVFilePath, "cv"); // remove old Image
+                }
+
+                var myTuple = await Helper.HandelFiles.UploadFile(request.CvForm); // Add the New Image
+
+                if (myTuple.Item1)
+                {
+                    jobSeeker.CVFilePath = myTuple.Item2;
+                }
+                else
+                    return BadRequest<GetJobSeekerResponse>(myTuple.Item2);
+            }
 
             var result = await _jobSeekerService.UpdateAsync(jobSeeker);
 
@@ -49,6 +125,29 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Commands.Handlers
 
         public async Task<Response<string>> Handle(DeleteJobSeekerCommand request, CancellationToken cancellationToken)
         {
+
+            if (request.JobSeekerId <= 0)
+            {
+                return BadRequest<string>("ID must be a positive integer.");
+            }
+
+            var existingJobSeeker = await _jobSeekerService.GetByIdAsync(request.JobSeekerId);
+
+            if (existingJobSeeker == null)
+            {
+                return NotFound<string>("This Id Doesn't Exist in DB");
+            }
+
+            if (existingJobSeeker.ImageFilePath != null)
+            {
+                await Helper.HandelFiles.RemoveFile(existingJobSeeker.ImageFilePath, "image"); // remove Image
+            }
+
+            if (existingJobSeeker.CVFilePath != null)
+            {
+                await Helper.HandelFiles.RemoveFile(existingJobSeeker.CVFilePath, "cv"); // remove Cv
+            }
+
             var result = await _jobSeekerService.DeleteAsync(request.JobSeekerId);
 
             if (!result)
