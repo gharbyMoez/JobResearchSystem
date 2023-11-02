@@ -9,41 +9,40 @@ namespace JobResearchSystem.Application.Helper
     {
         // private static readonly IConfiguration config;
 
-        public static async Task<(bool, string)> UploadImage(IFormFile file)
+        public static async Task<(bool, string)> UploadFile(IFormFile file)
         {
             try
             {
                 string FolderPath = Directory.GetCurrentDirectory();
                 string FileName = Guid.NewGuid() + Path.GetFileName(file.FileName);
-
+                string fileExtention = Path.GetExtension(file.FileName);
                 var imageAllowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
                 var cvAllowedExtensions = new string[] { ".pdf" };
+                var isImageType = imageAllowedExtensions.Contains(fileExtention);
+                var isCvType = cvAllowedExtensions.Contains(fileExtention);
 
-                //Upload Image
-                if ((!imageAllowedExtensions.Contains(Path.GetExtension(file.FileName))) || (!cvAllowedExtensions.Contains(Path.GetExtension(file.FileName)))) //Check Extention
-                {
-                    return (false, "Unsupported file extension");
-                }
-                if (!(file.Length <= 5 * 1024 * 1024)) //Check Image Size
-                {
-                    return (false, "Image size Can't be Greater than 5 MB");
-                }
 
                 using IHost host = Host.CreateDefaultBuilder().Build();
                 IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
 
-                if (!imageAllowedExtensions.Contains(Path.GetExtension(file.FileName)))
+                //Upload Image
+
+                if (file.Length >= 5 * 1024 * 1024)
                 {
-                    FolderPath = FolderPath + config["FilePaths:ImagesPath"]; // get Storage Location from App Setting
+                    return (false, "File Size is Greater Than 5 MB");
                 }
 
-                if (!cvAllowedExtensions.Contains(Path.GetExtension(file.FileName)))
+                if (isImageType) //Check Extention
+                {
+                    FolderPath = FolderPath + config["FilePaths:ImagesPath"]; // get Storage Location from App Setting                 
+                }
+                else //Upload Cv
+                if (isCvType) //Check Extention
                 {
                     FolderPath = FolderPath + config["FilePaths:CvsPath"]; // get Storage Location from App Setting
                 }
-
-
-
+                else
+                    return (false, "Unsupported file extension");
 
                 var FinalPath = Path.Combine(FolderPath, FileName);
 
@@ -59,15 +58,23 @@ namespace JobResearchSystem.Application.Helper
 
         ////////////////////////////////////////////////////////////////////////
 
-        public static async Task RemoveImage(string FileName)
+        public static async Task RemoveFile(string FileName, string type)
         {
             string CurrentDirectory = Directory.GetCurrentDirectory();
+            string FolderPath = "";
 
             //Remove Image
             using IHost host = Host.CreateDefaultBuilder().Build();
 
             IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
-            string FolderPath = config["FilePaths:BookImagePath"];
+            if (type == "cv")
+            {
+                FolderPath = config["FilePaths:CvsPath"];
+            }
+            if (type == "image")
+            {
+                FolderPath = config["FilePaths:ImagesPath"];
+            }
 
             var path = CurrentDirectory + Path.Combine(FolderPath, FileName);
 
