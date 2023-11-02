@@ -22,4 +22,9 @@
     <ProjectReference Include="..\JobResearchSystem.Infrastructure\JobResearchSystem.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\JobSeekerData\Cvs\" />
+    <Folder Include="wwwroot\JobSeekerData\ProfileImages\" />
+  </ItemGroup>
+
 </Project>
