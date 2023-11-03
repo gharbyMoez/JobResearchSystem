@@ -11,11 +11,11 @@ namespace JobResearchSystem.Application.IService
         Task<AuthResponseModel> LoginAsync(LoginDto loginDto);
 
         Task<IEnumerable<ResponseUserDetailsDto>> GetAllUsersAsync();
-        Task<ResponseUserDetailsDto> GetUserByIdAsync(string id);
+        Task<ResponseUserDetailsDto?> GetUserByIdAsync(string id);
 
 
-        Task<ResponseUserDetailsDto> UpdateUserAsync(UpdateUserDetailsDto Dto);
-        Task DeleteUserAsync(string id);
+        Task<ResponseUserDetailsDto?> UpdateUserAsync(UpdateUserDetailsDto Dto);
+        Task<bool> DeleteUserAsync(string id);
 
         Task<bool> ChangePassword(string userId, string password);
         //ChangePassword

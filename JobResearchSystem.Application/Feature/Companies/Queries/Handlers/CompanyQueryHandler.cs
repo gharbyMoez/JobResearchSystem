@@ -41,7 +41,7 @@ namespace JobResearchSystem.Application.Feature.Companies.Queries.Handlers
 
         public async Task<Response<GetCompanyResponse>> Handle(GetCompanyByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _companyService.GetByIdAsync(request.Id);
+            var entity = await _companyService.GetCompanyByUserIdAsync(request.UserId);
 
             if (entity == null)
             {

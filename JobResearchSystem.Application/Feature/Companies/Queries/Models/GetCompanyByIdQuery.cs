@@ -7,6 +7,6 @@ namespace JobResearchSystem.Application.Feature.Companies.Queries.Models
 {
     public class GetCompanyByIdQuery : IRequest<Response<GetCompanyResponse>>
     {
-        public int Id { get; set; }
+        public string UserId { get; set; }
     }
 }

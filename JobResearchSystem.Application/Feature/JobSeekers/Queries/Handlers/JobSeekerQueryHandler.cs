@@ -41,7 +41,7 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Queries.Handlers
 
         public async Task<Response<GetJobSeekerResponse>> Handle(GetJobSeekerByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _jobSeekerService.GetByIdAsync(request.JobSeekerId);
+            var entity = await _jobSeekerService.GetJobSeekerByUserIdAsync(request.UserId);
 
             if (entity == null)
             {

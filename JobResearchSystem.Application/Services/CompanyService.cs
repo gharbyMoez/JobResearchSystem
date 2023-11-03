@@ -1,6 +1,7 @@
 ﻿using JobResearchSystem.Application.GenericServices;
 using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
+using System.Linq.Expressions;
 
 namespace JobResearchSystem.Application.IService
 {
@@ -36,6 +37,11 @@ namespace JobResearchSystem.Application.IService
 
 
             return await base.UpdateAsync(newEntity);
+        }
+
+        public async Task<Company?> GetCompanyByUserIdAsync(string userId)
+        {
+            return await _unitOfWork.Companies.GetCompanyByUserIdAsync(userId);
         }
     }
 }

@@ -23,10 +23,10 @@ namespace JobResearchSystem.API.Controllers
         }
 
         // GET api/<CompanyController>/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get(string userId)
         {
-            var result = await Mediator.Send(new GetCompanyByIdQuery() { Id = id});
+            var result = await Mediator.Send(new GetCompanyByIdQuery() { UserId = userId});
 
             return NewResult(result);
         }

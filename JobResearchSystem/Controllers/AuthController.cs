@@ -8,7 +8,7 @@ namespace JobResearchSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ApiBaseController
     {
 
         #region CTOR
@@ -78,12 +78,14 @@ namespace JobResearchSystem.API.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteUser/Id")]
-        public async Task<IActionResult> DeleteUser([FromRoute] string Id)
+        [Route("DeleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {
-            await _authService.DeleteUserAsync(Id);
+            var result = await _authService.DeleteUserAsync(id);
 
-            return Ok();
+            if (!result) return BadRequest();
+
+            return NoContent();
         }
 
         [HttpGet]
@@ -103,6 +105,8 @@ namespace JobResearchSystem.API.Controllers
                 return BadRequest(ModelState);
 
             var result = await _authService.UpdateUserAsync(model);
+
+            if(result is null) return BadRequest("user not found!");
 
             return Ok(result);
         }

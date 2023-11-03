@@ -22,7 +22,7 @@ namespace JobResearchSystem.Application.Feature.Companies.Commands.Validators
             var userIdXX = _httpContext.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
 
             RuleFor(x => x.UserId)
-                .Equal(userIdXX).WithMessage("You trying to a access protected resources !");
+                .Equal(userIdXX).WithMessage("You are unauthorized!");
 
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")

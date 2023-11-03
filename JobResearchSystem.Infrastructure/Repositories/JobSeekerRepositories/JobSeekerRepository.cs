@@ -5,6 +5,7 @@ using JobResearchSystem.Infrastructure.Repositories.JobStatusRepositories;
 using JobResearchSystem.Infrastructure.Repositories.QualificationRepositories;
 using JobResearchSystem.Infrastructure.Repositories.UserTypeRepositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace JobResearchSystem.Infrastructure.Repositories.JobSeekerRepositories
 {
@@ -15,5 +16,13 @@ namespace JobResearchSystem.Infrastructure.Repositories.JobSeekerRepositories
         {
         }
         #endregion
+
+        public async Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId)
+        {
+            IQueryable<JobSeeker> query = _appDbContext.Set<JobSeeker>().AsNoTracking().Where(x => x.IsDeleted == false);
+
+            var entity = await query.FirstOrDefaultAsync(x => x.UserId == userId);
+            return entity;
+        }
     }
 }

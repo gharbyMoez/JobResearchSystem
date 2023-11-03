@@ -10,6 +10,9 @@ namespace JobResearchSystem.Application.IService
         {
         }
 
-      
+        public async Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId)
+        {
+            return await _unitOfWork.JobSeekers.GetJobSeekerByUserIdAsync(userId);
+        }
     }
 }

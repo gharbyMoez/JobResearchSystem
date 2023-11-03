@@ -7,6 +7,10 @@ namespace JobResearchSystem.Domain.Entities.Extend
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
+
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeleteDate { get; set; }
+
         /*----- Relations -----*/
 
         //[ForeignKey(nameof(JobSeeker))]

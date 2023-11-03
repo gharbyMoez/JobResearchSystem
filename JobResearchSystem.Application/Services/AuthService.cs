@@ -175,17 +175,22 @@ namespace JobResearchSystem.Application.Services
 
 
 
-        public async Task DeleteUserAsync(string id)
+        public async Task<bool> DeleteUserAsync(string id)
         {
-            var result = await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
-            if (result != null) { _db.Users.Remove(result); }
+            var result = await _db.Users.Where(x => x.IsDeleted == false).Where(x => x.Id == id).FirstOrDefaultAsync();
 
+            if (result is null) return false;
 
+            result.IsDeleted = true;
+            result.DeleteDate = DateTime.Now;
+            var count = await _db.SaveChangesAsync();
+
+            return count >0 ? true : false;
         }
 
         public async Task<IEnumerable<ResponseUserDetailsDto>> GetAllUsersAsync()
         {
-            var users = await _db.Users.ToListAsync();
+            var users = await _db.Users.Where(x => x.IsDeleted == false).ToListAsync();
 
             var usersResponseDto = _mapper.Map<IEnumerable<ResponseUserDetailsDto>>(users);
 
@@ -194,22 +199,29 @@ namespace JobResearchSystem.Application.Services
 
         public async Task<ResponseUserDetailsDto?> GetUserByIdAsync(string id)
         {
-            var user = await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var user = await _db.Users.Where(x => x.IsDeleted == false).Where(x => x.Id == id).FirstOrDefaultAsync();
 
             var userResponseDto = _mapper.Map<ResponseUserDetailsDto>(user);
 
             return userResponseDto;
         }
 
-        public async Task<ResponseUserDetailsDto> UpdateUserAsync(UpdateUserDetailsDto Dto)
+        public async Task<ResponseUserDetailsDto?> UpdateUserAsync(UpdateUserDetailsDto Dto)
         {
-            var user = _mapper.Map<ApplicationUser>(Dto);
+            var currentUser = await _db.Users.Where(x => x.IsDeleted == false).FirstOrDefaultAsync(x => x.Id == Dto.Id);
 
-            _db.Entry(user).State = EntityState.Modified;
+            if (currentUser is null) return null;
+
+            currentUser.FirstName = Dto.FirstName;
+            currentUser.LastName = Dto.LastName;
+            currentUser.UserName = Dto.UserName;
+            currentUser.PhoneNumber = Dto.PhoneNumber;
+
+            _db.Entry(currentUser).State = EntityState.Modified;
 
             await _db.SaveChangesAsync();
 
-            var responseUserDto = _mapper.Map<ResponseUserDetailsDto>(user);
+            var responseUserDto = _mapper.Map<ResponseUserDetailsDto>(currentUser);
 
             return responseUserDto;
         }

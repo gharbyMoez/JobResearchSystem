@@ -5,5 +5,6 @@ namespace JobResearchSystem.Infrastructure.Repositories.JobSeekerRepositories
 {
     public interface IJobSeekerRepository : IGenericRepository<JobSeeker>
     {
+        public Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId);
     }
 }

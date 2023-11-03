@@ -6,6 +6,6 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Queries.Models
 {
     public class GetJobSeekerByIdQuery : IRequest<Response<GetJobSeekerResponse>>
     {
-        public int JobSeekerId { get; set; }
+        public string UserId { get; set; }
     }
 }

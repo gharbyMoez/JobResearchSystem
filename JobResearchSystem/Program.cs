@@ -1,3 +1,4 @@
+using JobResearchSystem.API;
 using JobResearchSystem.Application;
 using JobResearchSystem.Domain.Entities.Extend;
 using JobResearchSystem.Infrastructure;
@@ -5,6 +6,7 @@ using JobResearchSystem.Infrastructure.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
@@ -24,7 +26,7 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 
 #region Connection String Configuration
 builder.Services.AddDbContext<ApplicationContext>(opt =>
@@ -102,6 +104,9 @@ builder.Services.AddSwaggerGen(c =>
             new string[]{}
         }
     });
+
+    //// Add the custom operation filter to remove the lock icon from non-secured endpoints
+    //c.OperationFilter<SecurityRequirementsOperationFilter>();
 
 });
 #endregion
