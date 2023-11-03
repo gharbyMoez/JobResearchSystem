@@ -24,14 +24,14 @@ namespace JobResearchSystem.API.Controllers
         }
 
         [HttpPost("AddJobSeeker")]
-        public async Task<IActionResult> AddJobSeeker(AddJobSeekerCommand command)
+        public async Task<IActionResult> AddJobSeeker([FromForm] AddJobSeekerCommand command)
         {
             var result = await Mediator.Send(command);
             return NewResult(result);
         }
 
         [HttpPut("UpdateJobSeeker")]
-        public async Task<IActionResult> UpdateJobSeeker(UpdateJobSeekerCommand command)
+        public async Task<IActionResult> UpdateJobSeeker([FromForm] UpdateJobSeekerCommand command)
         {
             var result = await Mediator.Send(command);
             return NewResult(result);
