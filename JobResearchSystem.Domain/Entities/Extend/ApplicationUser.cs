@@ -9,7 +9,8 @@ namespace JobResearchSystem.Domain.Entities.Extend
 
 
         public bool IsDeleted { get; set; } = false;
-        public DateTime? DeleteDate { get; set; }
+        public DateTime? DateDeleted { get; set; }
+
 
         /*----- Relations -----*/
 

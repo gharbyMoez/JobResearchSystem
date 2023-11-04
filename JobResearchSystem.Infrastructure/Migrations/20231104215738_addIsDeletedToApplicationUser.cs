@@ -12,7 +12,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "DeleteDate",
+                name: "DateDeleted",
                 table: "AspNetUsers",
                 type: "datetime2",
                 nullable: true);
@@ -29,7 +29,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DeleteDate",
+                name: "DateDeleted",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

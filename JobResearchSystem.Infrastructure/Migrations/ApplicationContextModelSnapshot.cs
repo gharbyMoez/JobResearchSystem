@@ -242,7 +242,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeleteDate")
+                    b.Property<DateTime?>("DateDeleted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")

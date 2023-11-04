@@ -182,7 +182,7 @@ namespace JobResearchSystem.Application.Services
             if (result is null) return false;
 
             result.IsDeleted = true;
-            result.DeleteDate = DateTime.Now;
+            result.DateDeleted = DateTime.Now;
             var count = await _db.SaveChangesAsync();
 
             return count >0 ? true : false;

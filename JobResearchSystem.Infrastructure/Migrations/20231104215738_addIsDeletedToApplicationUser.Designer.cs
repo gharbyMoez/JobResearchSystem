@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobResearchSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231103214355_addIsDeletedToApplicationUser")]
+    [Migration("20231104215738_addIsDeletedToApplicationUser")]
     partial class addIsDeletedToApplicationUser
     {
         /// <inheritdoc />
@@ -245,7 +245,7 @@ namespace JobResearchSystem.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeleteDate")
+                    b.Property<DateTime?>("DateDeleted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
