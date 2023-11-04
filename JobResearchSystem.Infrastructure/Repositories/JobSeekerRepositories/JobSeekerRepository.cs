@@ -17,9 +17,14 @@ namespace JobResearchSystem.Infrastructure.Repositories.JobSeekerRepositories
         }
         #endregion
 
-        public async Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId)
+        public async Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId, Expression<Func<JobSeeker, object>>[] includes = null)
         {
             IQueryable<JobSeeker> query = _appDbContext.Set<JobSeeker>().AsNoTracking().Where(x => x.IsDeleted == false);
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
 
             var entity = await query.FirstOrDefaultAsync(x => x.UserId == userId);
             return entity;

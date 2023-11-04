@@ -15,8 +15,8 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
-        [HttpGet("GetJobSeekerById")]
-        public async Task<IActionResult> GetJobSeekerById([FromQuery] GetJobSeekerByIdQuery query)
+        [HttpGet("GetJobSeekerByUserId")]
+        public async Task<IActionResult> GetJobSeekerByUserId([FromQuery] GetJobSeekerByIdQuery query)
         {
             var result = await Mediator.Send(query);
 

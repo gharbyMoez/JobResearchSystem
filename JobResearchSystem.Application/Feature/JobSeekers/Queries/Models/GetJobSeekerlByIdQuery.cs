@@ -4,7 +4,7 @@ using MediatR;
 
 namespace JobResearchSystem.Application.Feature.JobSeekers.Queries.Models
 {
-    public class GetJobSeekerByIdQuery : IRequest<Response<GetJobSeekerResponse>>
+    public class GetJobSeekerByIdQuery : IRequest<Response<GetJobSeekerDetailsResponse>>
     {
         public string UserId { get; set; }
     }

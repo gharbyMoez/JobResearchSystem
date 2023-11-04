@@ -10,6 +10,14 @@ namespace JobResearchSystem.Application.IService
         {
         }
 
+        public async Task<IEnumerable<Qualification>?> GetAllQualificationByJobseekerIdAsync(int jobSeekerId)
+        {
+            var jobSeeker = await _unitOfWork.GetRepository<JobSeeker>().GetByIdAsync(jobSeekerId, x => x.Qualifications);
+
+            if (jobSeeker == null) return null;
+
+            return jobSeeker.Qualifications?.ToList();
+        }
 
     }
 }

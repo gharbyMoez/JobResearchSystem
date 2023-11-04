@@ -118,6 +118,7 @@ builder.Services
 
 var app = builder.Build();
 
+#region Seed and Update Database
 using var scope = app.Services.CreateScope();
 
 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
@@ -134,7 +135,8 @@ catch (Exception ex)
 {
     var logger = loggerFactory.CreateLogger<Program>();
     logger.LogError(ex, "Database updating failed !");
-}
+} 
+#endregion
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

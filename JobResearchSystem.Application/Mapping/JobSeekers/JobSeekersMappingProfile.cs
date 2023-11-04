@@ -10,6 +10,7 @@ namespace JobResearchSystem.Application.Mapping.JobSeekers
         public JobSeekersMappingProfile()
         {
             CreateMap<JobSeeker, GetJobSeekerResponse>();
+            CreateMap<JobSeeker, GetJobSeekerDetailsResponse>();
             CreateMap<UpdateJobSeekerCommand, GetJobSeekerResponse>();
 
             CreateMap<AddJobSeekerCommand, JobSeeker>();

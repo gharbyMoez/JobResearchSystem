@@ -5,6 +5,6 @@ namespace JobResearchSystem.Application.IService
 {
     public interface IQualificationService : IGenericService<Qualification>
     {
-
+        public Task<IEnumerable<Qualification>?> GetAllQualificationByJobseekerIdAsync(int jobSeekerId);
     }
 }

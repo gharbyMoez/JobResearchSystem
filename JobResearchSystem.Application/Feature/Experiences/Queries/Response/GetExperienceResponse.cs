@@ -11,5 +11,8 @@
         public DateTime? ExperienceEndDate { get; set; }
 
         public string? PositionDescription { get; set; }
+
+        public int JobSeekerId { get; set; }
+
     }
 }

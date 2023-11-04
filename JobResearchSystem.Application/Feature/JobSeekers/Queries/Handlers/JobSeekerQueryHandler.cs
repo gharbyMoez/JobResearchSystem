@@ -9,7 +9,7 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Queries.Handlers
 {
     public class JobSeekerQueryHandler : ResponseHandler,
                                          IRequestHandler<GetAllJobSeekersQuery, Response<IEnumerable<GetJobSeekerResponse>>>,
-                                         IRequestHandler<GetJobSeekerByIdQuery, Response<GetJobSeekerResponse>>
+                                         IRequestHandler<GetJobSeekerByIdQuery, Response<GetJobSeekerDetailsResponse>>
     {
         #region CTOR
         private IJobSeekerService _jobSeekerService;
@@ -39,17 +39,17 @@ namespace JobResearchSystem.Application.Feature.JobSeekers.Queries.Handlers
 
         }
 
-        public async Task<Response<GetJobSeekerResponse>> Handle(GetJobSeekerByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<GetJobSeekerDetailsResponse>> Handle(GetJobSeekerByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _jobSeekerService.GetJobSeekerByUserIdAsync(request.UserId);
 
             if (entity == null)
             {
-                return NotFound<GetJobSeekerResponse>("Sorry, There is no data to display!");
+                return NotFound<GetJobSeekerDetailsResponse>("Sorry, There is no data to display!");
             }
             else
             {
-                var entityMapped = _mapper.Map<GetJobSeekerResponse>(entity);
+                var entityMapped = _mapper.Map<GetJobSeekerDetailsResponse>(entity);
 
 
                 return Success(entityMapped);

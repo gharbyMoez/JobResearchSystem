@@ -34,6 +34,15 @@ namespace JobResearchSystem.Application.IService
 
             return await base.UpdateAsync(entity);
         }
+
+        public async Task<IEnumerable<Experience>?> GetAllExperiencesByJobseekerIdAsync(int jobSeekerId)
+        {
+            var jobSeeker = await _unitOfWork.GetRepository<JobSeeker>().GetByIdAsync(jobSeekerId, x => x.Experiences);
+
+            if (jobSeeker == null) return null;
+
+            return jobSeeker.Experiences?.ToList();
+        }
     }
 
 }

@@ -3,29 +3,32 @@ using JobResearchSystem.Application.Bases;
 using JobResearchSystem.Application.Feature.Experiences.Queries.Models;
 using JobResearchSystem.Application.Feature.Qualifications.Queries.Models;
 using JobResearchSystem.Application.Feature.Qualifications.Queries.Response;
+using JobResearchSystem.Application.Feature.Skills.Queries.Response;
 using JobResearchSystem.Application.IService;
+using JobResearchSystem.Application.Services;
 using MediatR;
 
 namespace JobResearchSystem.Application.Feature.Qualifications.Queries.Handlers
 {
     public class QualificationQueryHandler : ResponseHandler,
                                      IRequestHandler<GetAllQualificationsQuery, Response<IEnumerable<GetQualificationResponse>>>,
+                                     IRequestHandler<GetAllQualificationByJobseekerIdQuery, Response<IEnumerable<GetQualificationResponse>>>,
                                      IRequestHandler<GetQualificationByIdQuery, Response<GetQualificationResponse>>
     {
         #region CTOR
-        private IQualificationService _experienceService;
         private IMapper _mapper;
+        private readonly IQualificationService _qualificationService;
 
-        public QualificationQueryHandler(IQualificationService experienceService, IMapper mapper)
+        public QualificationQueryHandler(IQualificationService qualificationService, IMapper mapper)
         {
-            _experienceService = experienceService;
+            this._qualificationService = qualificationService;
             _mapper = mapper;
         }
         #endregion
 
         public async Task<Response<IEnumerable<GetQualificationResponse>>> Handle(GetAllQualificationsQuery request, CancellationToken cancellationToken)
         {
-            var entitiesList = await _experienceService.GetAllAsync();
+            var entitiesList = await _qualificationService.GetAllAsync();
             if (entitiesList == null)
             {
                 return NotFound<IEnumerable<GetQualificationResponse>>();
@@ -42,7 +45,7 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Queries.Handlers
 
         public async Task<Response<GetQualificationResponse>> Handle(GetQualificationByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _experienceService.GetByIdAsync(request.QualificationId);
+            var entity = await _qualificationService.GetByIdAsync(request.QualificationId);
 
             if (entity == null)
             {
@@ -57,6 +60,16 @@ namespace JobResearchSystem.Application.Feature.Qualifications.Queries.Handlers
             }
         }
 
+        public async Task<Response<IEnumerable<GetQualificationResponse>>> Handle(GetAllQualificationByJobseekerIdQuery request, CancellationToken cancellationToken)
+        {
+            var entityList = await _qualificationService.GetAllQualificationByJobseekerIdAsync(request.JobseekerId);
 
+            if (entityList == null)
+                return NotFound<IEnumerable<GetQualificationResponse>>("Sorry, There is no data to display!");
+
+            var entityListMapped = _mapper.Map<IEnumerable<GetQualificationResponse>>(entityList);
+
+            return Success(entityListMapped);
+        }
     }
 }

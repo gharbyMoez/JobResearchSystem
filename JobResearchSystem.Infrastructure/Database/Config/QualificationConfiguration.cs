@@ -35,6 +35,9 @@ namespace JobResearchSystem.Infrastructure.Database.Config
                 .WithMany(x => x.Qualifications)
                 .HasForeignKey(x => x.JobSeekerId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasQueryFilter(x => x.IsDeleted == false);
+
         }
     }
 

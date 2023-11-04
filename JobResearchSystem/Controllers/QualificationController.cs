@@ -26,6 +26,14 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [HttpGet("GetAllQualificationByJobseekerId")]
+        public async Task<IActionResult> GetAllQualificationByJobseekerId([FromQuery] GetAllQualificationByJobseekerIdQuery query)
+        {
+            var result = await Mediator.Send(query);
+
+            return NewResult(result);
+        }
+
         [HttpPost("AddQualification")]
         public async Task<IActionResult> AddQualification(AddQualificationCommand command)
         {

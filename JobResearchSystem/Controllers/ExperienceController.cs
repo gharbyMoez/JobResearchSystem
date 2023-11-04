@@ -25,6 +25,14 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [HttpGet("GetAllExperiencesByJobSeekerId")]
+        public async Task<IActionResult> GetAllExperiencesByJobSeekerId([FromQuery] GetAllExperiencesByJobSeekerIdQuery query)
+        {
+            var result = await Mediator.Send(query);
+
+            return NewResult(result);
+        }
+
         [HttpPost("AddExperience")]
         public async Task<IActionResult> AddExperience(AddExperienceCommand command)
         {

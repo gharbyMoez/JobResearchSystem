@@ -1,6 +1,7 @@
 ﻿using JobResearchSystem.Application.GenericServices;
 using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobResearchSystem.Application.IService
 {
@@ -12,7 +13,7 @@ namespace JobResearchSystem.Application.IService
 
         public async Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId)
         {
-            return await _unitOfWork.JobSeekers.GetJobSeekerByUserIdAsync(userId);
+            return await _unitOfWork.JobSeekers.GetJobSeekerByUserIdAsync(userId, x => x.Qualifications, x => x.Experiences, x => x.Skills);
         }
     }
 }

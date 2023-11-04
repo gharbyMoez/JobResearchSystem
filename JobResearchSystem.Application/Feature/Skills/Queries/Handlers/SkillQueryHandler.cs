@@ -9,6 +9,7 @@ namespace JobResearchSystem.Application.Feature.Skills.Queries.Handlers
 {
     public class SkillQueryHandler : ResponseHandler,
                                      IRequestHandler<GetAllSkillsQuery, Response<IEnumerable<GetSkillResponse>>>,
+                                     IRequestHandler<GetAllSkillsByJobSeekerIdQuery, Response<IEnumerable<GetSkillResponse>>>,
                                      IRequestHandler<GetSkillByIdQuery, Response<GetSkillResponse>>
     {
         #region CTOR
@@ -51,11 +52,20 @@ namespace JobResearchSystem.Application.Feature.Skills.Queries.Handlers
             {
                 var entityMapped = _mapper.Map<GetSkillResponse>(entity);
 
-
                 return Success(entityMapped);
             }
         }
 
+        public async Task<Response<IEnumerable<GetSkillResponse>>> Handle(GetAllSkillsByJobSeekerIdQuery request, CancellationToken cancellationToken)
+        {
+            var entityList = await _skillService.GetAllSkillByJobseekerIdAsync(request.JobSeekerId);
 
+            if (entityList == null)
+                return NotFound<IEnumerable<GetSkillResponse>>("Sorry, There is no data to display!");
+
+            var entityListMapped = _mapper.Map<IEnumerable<GetSkillResponse>>(entityList);
+
+            return Success(entityListMapped);
+        }
     }
 }

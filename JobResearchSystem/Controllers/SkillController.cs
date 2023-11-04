@@ -17,6 +17,13 @@ namespace JobResearchSystem.API.Controllers
             return NewResult(result);
         }
 
+        [HttpGet("GetAllSkillsByJobSeekerId")]
+        public async Task<IActionResult> GetAllSkillsByJobSeekerId([FromQuery] GetAllSkillsByJobSeekerIdQuery query)
+        {
+            var result = await Mediator.Send(query);
+            return NewResult(result);
+        }
+
         [HttpGet("GetSkillById")]
         public async Task<IActionResult> GetSkillById([FromQuery] GetSkillByIdQuery query)
         {
