@@ -17,6 +17,8 @@ namespace JobResearchSystem.Infrastructure.Repositories.JobsRepositories
         {
         }
 
+
+
         public async Task<Job?> GetByIdWithJobApplicantAndJobSeekerAsync(int id, Expression<Func<Job, object>>[] includes = null)
         {
 

@@ -14,6 +14,9 @@ namespace JobResearchSystem.Application.Mapping.Experiences
                              .ForMember(dest => dest.CompanyName, opt => opt.MapFrom(src => src.Company.CompanyName))
                              .ForMember(dest => dest.NumberOfApplicants, opt => opt.MapFrom(src => src.Applicants.Count()));
 
+
+            CreateMap<Job, GetPaginatedJobResponse>();
+
             CreateMap<UpdateJobCommand, GetJobResponse>();
 
             CreateMap<AddJobCommand, Job>();

@@ -67,6 +67,24 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
             return await query.ToListAsync();
 
         }
+        
+        public virtual IQueryable<T> GetAllPaginatedAsync(Expression<Func<T, object>>[] includes = null)
+        {
+            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
+
+            //foreach (var include in includes)
+            //{
+            //    query = query.Include(include);
+            //}
+
+            return query;
+
+        }
+
+        public IQueryable<T> GetTableNoTracking()
+        {
+            return _appDbContext.Set<T>().AsNoTracking().AsQueryable();
+        }
 
         public virtual async Task<T?> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
         {

@@ -11,7 +11,7 @@ namespace JobResearchSystem.Application.Feature.Jobs.Commands.Handlers
     public class JobCommandHandler : ResponseHandler,
                                        IRequestHandler<AddJobCommand, Response<string>>,
                                        IRequestHandler<DeleteJobCommand, Response<string>>,
-                                       IRequestHandler<UpdateJobCommand, Response<GetJobResponse>>
+                                       IRequestHandler<UpdateJobCommand, Response<UpdateJobResponse>>
     {
         #region CTOR
         private IJobService _JobService;
@@ -35,16 +35,16 @@ namespace JobResearchSystem.Application.Feature.Jobs.Commands.Handlers
             return Created(" Job Added Successfully");
         }
 
-        public async Task<Response<GetJobResponse>> Handle(UpdateJobCommand request, CancellationToken cancellationToken)
+        public async Task<Response<UpdateJobResponse>> Handle(UpdateJobCommand request, CancellationToken cancellationToken)
         {
             var experiene = _mapper.Map<Job>(request);
 
             var result = await _JobService.UpdateAsync(experiene);
 
-            var resultDto = _mapper.Map<GetJobResponse>(request);
+            var resultDto = _mapper.Map<UpdateJobResponse>(request);
 
-            if (resultDto == null) { return BadRequest<GetJobResponse>(""); }
-            else { return Success<GetJobResponse>(resultDto); }
+            if (resultDto == null) { return BadRequest<UpdateJobResponse>(""); }
+            else { return Success<UpdateJobResponse>(resultDto); }
         }
 
 

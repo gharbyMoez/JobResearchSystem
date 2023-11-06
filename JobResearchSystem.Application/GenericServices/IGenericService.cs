@@ -13,7 +13,7 @@ namespace JobResearchSystem.Application.GenericServices
     {
         public Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
 
-
+        IQueryable<T> GetAllPaginatedAsync(Expression<Func<T, object>>[] includes = null);
         public Task<T?> GetByIdAsync(int id,params Expression<Func<T, object>>[] includes );
 
 

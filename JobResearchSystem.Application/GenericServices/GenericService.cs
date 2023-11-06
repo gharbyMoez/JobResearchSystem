@@ -24,6 +24,14 @@ namespace JobResearchSystem.Application.GenericServices
             return t; /*await _repository.GetAllAsync();*/
 
         }
+       
+        public virtual IQueryable<TEntity> GetAllPaginatedAsync(Expression<Func<TEntity, object>>[] includes = null)
+        {
+            var t = _unitOfWork.GetRepository<TEntity>().GetAllPaginatedAsync(includes);
+            return t; 
+        }
+
+        
 
         public virtual async Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>>[] includes = null)
         {

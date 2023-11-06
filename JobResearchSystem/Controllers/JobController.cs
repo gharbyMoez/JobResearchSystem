@@ -1,5 +1,6 @@
 ﻿using JobResearchSystem.Application.Feature.Jobs.Commands.Models;
 using JobResearchSystem.Application.Feature.Jobs.Queries.Models;
+using JobResearchSystem.Application.Wrappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,14 @@ namespace JobResearchSystem.API.Controllers
         {
             var result = await Mediator.Send(new GetAllJobsQuery());
             return NewResult(result);
+        }
+        
+        [HttpGet("GetAllJobsPaginated")]
+        public async Task<IActionResult> GetAllJobsPaginated([FromQuery] GetJobPaginatedListQuery getJobPaginatedListQuery)
+        {
+            var result = await Mediator.Send(getJobPaginatedListQuery);
+
+            return Ok(result);
         }
 
         [HttpGet("GetJobById")]

@@ -1,5 +1,6 @@
 using JobResearchSystem.API;
 using JobResearchSystem.Application;
+using JobResearchSystem.Application.Midleware;
 using JobResearchSystem.Domain.Entities.Extend;
 using JobResearchSystem.Infrastructure;
 using JobResearchSystem.Infrastructure.Database;
@@ -104,10 +105,6 @@ builder.Services.AddSwaggerGen(c =>
             new string[]{}
         }
     });
-
-    //// Add the custom operation filter to remove the lock icon from non-secured endpoints
-    //c.OperationFilter<SecurityRequirementsOperationFilter>();
-
 });
 #endregion
 
@@ -144,6 +141,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

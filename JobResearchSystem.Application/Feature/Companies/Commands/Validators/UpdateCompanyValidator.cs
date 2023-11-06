@@ -19,10 +19,10 @@ namespace JobResearchSystem.Application.Feature.Companies.Commands.Validators
 
         public void ApplyValidationsRules()
         {
-            var userIdXX = _httpContext.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
+            var userId = _httpContext.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "uid")?.Value;
 
             RuleFor(x => x.UserId)
-                .Equal(userIdXX).WithMessage("You are unauthorized!");
+                .Equal(userId).WithMessage("You are unauthorized!");
 
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("NotEmpty")

@@ -1,10 +1,8 @@
-﻿using JobResearchSystem.Application.Bases;
-using JobResearchSystem.Application.Feature.Jobs.Queries.Response;
-using MediatR;
+﻿using JobResearchSystem.Domain.Entities;
 
-namespace JobResearchSystem.Application.Feature.Jobs.Commands.Models
+namespace JobResearchSystem.Application.Feature.Jobs.Queries.Response
 {
-    public class UpdateJobCommand : IRequest<Response<UpdateJobResponse>>
+    public class UpdateJobResponse
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -21,8 +19,9 @@ namespace JobResearchSystem.Application.Feature.Jobs.Commands.Models
 
         /*----- Relations -----*/
 
-        public int CompanyId { get; set; }
-        public int CategoryId { get; set; }
+        public string CompanyName { get; set; }
+        public string CategoryName { get; set; }
+        public int NumberOfApplicants { get; set; }
 
         public int? JobStatusId { get; set; } = 1;
     }
