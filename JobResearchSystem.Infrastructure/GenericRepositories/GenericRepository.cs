@@ -15,7 +15,6 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
             _appDbContext = appDbContext;
         }
 
-
         public virtual async Task<T?> CreateAsync(T entity)
         {
             await _appDbContext.Set<T>().AddAsync(entity);
@@ -98,5 +97,6 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
             var entity = await query.FirstOrDefaultAsync(x => x.Id == id);
             return entity;
         }
+
     }
 }

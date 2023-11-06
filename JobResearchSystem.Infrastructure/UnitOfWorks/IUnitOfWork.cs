@@ -11,11 +11,6 @@ using JobResearchSystem.Infrastructure.Repositories.JobStatusRepositories;
 using JobResearchSystem.Infrastructure.Repositories.QualificationRepositories;
 using JobResearchSystem.Infrastructure.Repositories.SkillRepositories;
 using JobResearchSystem.Infrastructure.Repositories.UserTypeRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JobResearchSystem.Infrastructure.UnitOfWorks
 {
