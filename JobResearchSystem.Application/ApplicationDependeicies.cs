@@ -27,6 +27,9 @@ namespace JobResearchSystem.Application
             services.AddTransient<IUserTypeService, UserTypeService>();
             services.AddTransient<IQualificationService, QualificationService>();
 
+            services.AddTransient<IAuthService, AuthService>();
+
+
 
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));

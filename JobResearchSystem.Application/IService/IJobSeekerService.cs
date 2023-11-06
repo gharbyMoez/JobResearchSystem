@@ -5,6 +5,6 @@ namespace JobResearchSystem.Application.IService
 {
     public interface IJobSeekerService : IGenericService<JobSeeker>
     {
-
+        public Task<JobSeeker?> GetJobSeekerByUserIdAsync(string userId);
     }
 }

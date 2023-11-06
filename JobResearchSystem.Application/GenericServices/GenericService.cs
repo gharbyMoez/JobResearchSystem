@@ -1,6 +1,7 @@
 ﻿using JobResearchSystem.Domain.Entities;
 using JobResearchSystem.Infrastructure.GenericRepositories;
 using JobResearchSystem.Infrastructure.UnitOfWorks;
+using System.Linq.Expressions;
 
 namespace JobResearchSystem.Application.GenericServices
 {
@@ -8,7 +9,7 @@ namespace JobResearchSystem.Application.GenericServices
         where TEntity : BaseEntity
     {
         protected readonly IUnitOfWork _unitOfWork;
-        private readonly IGenericRepository<TEntity> _repository;
+        protected readonly IGenericRepository<TEntity> _repository;
 
         public GenericService(IUnitOfWork unitOfWork)
         {
@@ -17,20 +18,20 @@ namespace JobResearchSystem.Application.GenericServices
         }
 
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, object>>[] includes = null)
         {
-            var t = await _unitOfWork.GetRepository<TEntity>().GetAllAsync();
+            var t = await _unitOfWork.GetRepository<TEntity>().GetAllAsync(includes);
             return t; /*await _repository.GetAllAsync();*/
 
         }
 
-        public virtual async Task<TEntity?> GetByIdAsync(int id)
+        public virtual async Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>>[] includes = null)
         {
-            var t = await _unitOfWork.GetRepository<TEntity>().GetByIdAsync(id);
+            var t = await _unitOfWork.GetRepository<TEntity>().GetByIdAsync(id, includes);
             return t; /*await _repository.GetByIdAsync(id);*/
         }
 
-        public async Task<TEntity?> CreateAsync(TEntity entity)
+        public virtual async Task<TEntity?> CreateAsync(TEntity entity)
         {
             await _unitOfWork.GetRepository<TEntity>().CreateAsync(entity);
 
@@ -40,7 +41,7 @@ namespace JobResearchSystem.Application.GenericServices
             return count > 0 ? entity : null;
         }
 
-        public async Task<TEntity?> UpdateAsync(TEntity entity)
+        public virtual async Task<TEntity?> UpdateAsync(TEntity entity)
         {
             await _unitOfWork.GetRepository<TEntity>().UpdateAsync(entity);
             // await _repository.UpdateAsync(entity);
@@ -49,7 +50,7 @@ namespace JobResearchSystem.Application.GenericServices
             return count > 0 ? entity : null;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public virtual async Task<bool> DeleteAsync(int id)
         {
             await _unitOfWork.GetRepository<TEntity>().DeleteAsync(id);
             // await _repository.DeleteAsync(id);

@@ -21,7 +21,7 @@ namespace JobResearchSystem.Infrastructure.Database.Config
             builder.Property(x => x.PositionDescription)
                 .IsRequired();
 
-
+            builder.HasQueryFilter(x => x.IsDeleted == false);
         }
     }
 

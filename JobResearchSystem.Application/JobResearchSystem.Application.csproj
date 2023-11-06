@@ -13,10 +13,21 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JobResearchSystem.Infrastructure\JobResearchSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Feature\ApplicantStatus\Commands\Handlers\" />
+    <Folder Include="Feature\ApplicantStatus\Commands\Models\" />
+    <Folder Include="Feature\ApplicantStatus\Commands\Validators\" />
+    <Folder Include="Feature\JobStatus\Commands\Handlers\" />
+    <Folder Include="Feature\JobStatus\Commands\Models\" />
+    <Folder Include="Feature\JobStatus\Commands\Validators\" />
   </ItemGroup>
 
 </Project>

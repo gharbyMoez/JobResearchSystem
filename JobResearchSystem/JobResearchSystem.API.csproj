@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +20,11 @@
     <ProjectReference Include="..\JobResearchSystem.Application\JobResearchSystem.Application.csproj" />
     <ProjectReference Include="..\JobResearchSystem.Domain\JobResearchSystem.Domain.csproj" />
     <ProjectReference Include="..\JobResearchSystem.Infrastructure\JobResearchSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\JobSeekerData\Cvs\" />
+    <Folder Include="wwwroot\JobSeekerData\ProfileImages\" />
   </ItemGroup>
 
 </Project>

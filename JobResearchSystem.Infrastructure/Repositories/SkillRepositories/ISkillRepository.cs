@@ -5,5 +5,6 @@ namespace JobResearchSystem.Infrastructure.Repositories.SkillRepositories
 {
     public interface ISkillRepository : IGenericRepository<Skill>
     {
+
     }
 }

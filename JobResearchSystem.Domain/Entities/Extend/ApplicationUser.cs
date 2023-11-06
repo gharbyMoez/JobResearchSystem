@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobResearchSystem.Domain.Entities.Extend
 {
     public class ApplicationUser : IdentityUser
     {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+
+
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DateDeleted { get; set; }
+
 
         /*----- Relations -----*/
 

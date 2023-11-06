@@ -2,6 +2,7 @@
 using JobResearchSystem.Application.Bases;
 using JobResearchSystem.Application.Feature.Experiences.Queries.Models;
 using JobResearchSystem.Application.Feature.Experiences.Queries.Response;
+using JobResearchSystem.Application.Feature.Qualifications.Queries.Response;
 using JobResearchSystem.Application.IService;
 using MediatR;
 
@@ -9,6 +10,7 @@ namespace JobResearchSystem.Application.Feature.Experiences.Queries.Handlers
 {
     public class ExperienceQueryHandler : ResponseHandler,
                                      IRequestHandler<GetAllExperiencesQuery, Response<IEnumerable<GetExperienceResponse>>>,
+                                     IRequestHandler<GetAllExperiencesByJobSeekerIdQuery, Response<IEnumerable<GetExperienceResponse>>>,
                                      IRequestHandler<GetExperienceByIdQuery, Response<GetExperienceResponse>>
     {
         #region CTOR
@@ -56,6 +58,16 @@ namespace JobResearchSystem.Application.Feature.Experiences.Queries.Handlers
             }
         }
 
+        public async Task<Response<IEnumerable<GetExperienceResponse>>> Handle(GetAllExperiencesByJobSeekerIdQuery request, CancellationToken cancellationToken)
+        {
+            var entityList = await _experienceService.GetAllExperiencesByJobseekerIdAsync(request.JobSeekerId);
 
+            if (entityList == null)
+                return NotFound<IEnumerable<GetExperienceResponse>>("Sorry, There is no data to display!");
+
+            var entityListMapped = _mapper.Map<IEnumerable<GetExperienceResponse>>(entityList);
+
+            return Success(entityListMapped);
+        }
     }
 }

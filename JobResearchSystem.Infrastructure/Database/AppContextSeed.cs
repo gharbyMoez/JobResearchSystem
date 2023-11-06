@@ -14,7 +14,7 @@ namespace JobResearchSystem.Infrastructure.Database
         public static async Task SeedAsync(ApplicationContext dbContext)
         {
 
-            #region Users
+            #region Seeding Data
             if (!dbContext.UserTypes.Any())
             {
                 var stringData = File.ReadAllText("../JobResearchSystem.Infrastructure/Database/DataSeed/UserType.json");
@@ -39,6 +39,10 @@ namespace JobResearchSystem.Infrastructure.Database
                     new ApplicationUser() {Id = "user3", Email="foo.example.com", UserTypeId = 3},
                     new ApplicationUser() {Id = "user4", Email="foo.example.com", UserTypeId = 1},
                     new ApplicationUser() {Id = "user5", Email="foo.example.com", UserTypeId = 2},
+                    new ApplicationUser() {Id = "user6", Email="foo.example.com", UserTypeId = 2},
+                    new ApplicationUser() {Id = "user7", Email="foo.example.com", UserTypeId = 2},
+                    new ApplicationUser() {Id = "user8", Email="foo.example.com", UserTypeId = 2},
+                    new ApplicationUser() {Id = "user9", Email="foo.example.com", UserTypeId = 2},
                 };
 
 

@@ -8,13 +8,12 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
 
-        private readonly ApplicationContext _appDbContext;
+        protected readonly ApplicationContext _appDbContext;
 
         public GenericRepository(ApplicationContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-
 
         public virtual async Task<T?> CreateAsync(T entity)
         {
@@ -25,9 +24,14 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public virtual async Task<T?> UpdateAsync(T entity)
         {
+            //var oldEntity = await GetByIdAsync(entity.Id);
+
+            //if (oldEntity is null) return null;
+
             _appDbContext.Entry(entity).State = EntityState.Modified;
-            //await _appDbContext.SaveChangesAsync();
+
             return entity;
+
         }
 
         public virtual async Task<bool> DeleteAsync(int id)
@@ -50,7 +54,7 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
             return false;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, object>>[] includes = null)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, object>>[] includes = null)
         {
             IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
 
@@ -65,7 +69,7 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
 
         public virtual async Task<T?> GetByIdAsync(int id, Expression<Func<T, object>>[] includes = null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>().Where(x => x.IsDeleted == false);
+            IQueryable<T> query = _appDbContext.Set<T>().AsNoTracking().Where(x => x.IsDeleted == false);
 
             foreach (var include in includes)
             {
@@ -75,5 +79,6 @@ namespace JobResearchSystem.Infrastructure.GenericRepositories
             var entity = await query.FirstOrDefaultAsync(x => x.Id == id);
             return entity;
         }
+
     }
 }

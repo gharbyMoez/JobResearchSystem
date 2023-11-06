@@ -26,8 +26,9 @@ namespace JobResearchSystem.Application.Feature.Skills.Commands.Handlers
 
         public async Task<Response<string>> Handle(AddSkillCommand request, CancellationToken cancellationToken)
         {
-            var movie = _mapper.Map<Skill>(request);
-            var result = await _skillService.CreateAsync(movie);
+            var skill = _mapper.Map<Skill>(request);
+            
+            var result = await _skillService.AddSkillToJobseekerAsync(request.JobSeekerId, skill);
 
             if (result is null)
                 return BadRequest<string>("Something Went Wrong");

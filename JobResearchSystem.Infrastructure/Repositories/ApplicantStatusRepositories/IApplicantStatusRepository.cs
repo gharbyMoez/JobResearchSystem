@@ -5,5 +5,6 @@ namespace JobResearchSystem.Infrastructure.Repositories.ApplicantStatusRepositor
 {
     public interface IApplicantStatusRepository : IGenericRepository<ApplicantStatus>
     {
+
     }
 }

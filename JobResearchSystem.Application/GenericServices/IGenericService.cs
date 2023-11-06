@@ -11,10 +11,10 @@ namespace JobResearchSystem.Application.GenericServices
 {
     public interface IGenericService<T> where T : BaseEntity
     {
-        public Task<IEnumerable<T>> GetAllAsync();
+        public Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
 
 
-        public Task<T?> GetByIdAsync(int id);
+        public Task<T?> GetByIdAsync(int id,params Expression<Func<T, object>>[] includes );
 
 
         public Task<T?> CreateAsync(T entity);

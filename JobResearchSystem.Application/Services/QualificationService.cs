@@ -10,29 +10,14 @@ namespace JobResearchSystem.Application.IService
         {
         }
 
-        public Task<Qualification?> CreateAsync(Qualification entity)
+        public async Task<IEnumerable<Qualification>?> GetAllQualificationByJobseekerIdAsync(int jobSeekerId)
         {
-            throw new NotImplementedException();
+            var jobSeeker = await _unitOfWork.GetRepository<JobSeeker>().GetByIdAsync(jobSeekerId, x => x.Qualifications);
+
+            if (jobSeeker == null) return null;
+
+            return jobSeeker.Qualifications?.ToList();
         }
 
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Qualification>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Qualification?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Qualification?> UpdateAsync(Qualification entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

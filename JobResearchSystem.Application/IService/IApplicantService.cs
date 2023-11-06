@@ -5,5 +5,6 @@ namespace JobResearchSystem.Application.IService
 {
     public interface IApplicantService : IGenericService<Applicant>
     {
+        Task<IEnumerable<Applicant>> GetApplicantsByJobIdAsync(int jobId);
     }
 }

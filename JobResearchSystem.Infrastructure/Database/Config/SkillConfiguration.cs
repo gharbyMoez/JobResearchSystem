@@ -19,6 +19,9 @@ namespace JobResearchSystem.Infrastructure.Database.Config
             builder.Property(x => x.SkillName)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            builder.HasQueryFilter(x => x.IsDeleted == false);
+
         }
     }
 }

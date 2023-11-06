@@ -6,7 +6,7 @@ namespace JobResearchSystem.Application.Feature.Experiences.Commands.Models
 {
     public class UpdateExperienceCommand : IRequest<Response<GetExperienceResponse>>
     {
-        public int ExperienceId { get; set; }
+        public int Id { get; set; }
         public string ExperienceCompanyName { get; set; }
 
         public string ExperienceTitle { get; set; }
@@ -18,6 +18,6 @@ namespace JobResearchSystem.Application.Feature.Experiences.Commands.Models
 
         /*----- Relations -----*/
 
-        public int JobSeekerId { get; set; }
+        //public int JobSeekerId { get; set; }
     }
 }
